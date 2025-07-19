@@ -160,7 +160,8 @@ This dual approach supports both exploratory analysis and practical forecasting 
 
 ## Linear Regression: Actual vs Predicted Visualization
 
- <img src="C:\Users\Rachelb\DS_Project1\DS_Team_1_Project\image.png" alt="Linear Regression Visualization">
+! [Linear Regression model](<Linear Regression.png>)
+
 
 ## Overview
 
@@ -199,7 +200,7 @@ Overall, this plot confirms that the Linear Regression provides a reasonable bas
 
 # Random Forest: Actual vs Predicted Visualization
 
-  <img src="C:\Users\Rachelb\DS_Project1\DS_Team_1_Project\image-1.png" alt="Random Forest: Actual vs Predicted Visualization">
+  ![Random Forest Model]](<Random Forest.png>)
 
 
 ## Overview
