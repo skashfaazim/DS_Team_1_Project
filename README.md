@@ -158,7 +158,24 @@ This dual approach supports both exploratory analysis and practical forecasting 
 - Limitations:  
   Cannot capture nonlinear trends or interactions (e.g., "hour × weekend").
 
+## Linear Regression: Actual vs Predicted Visualization
+
+![alt text](image.png)
+
+
+## Overview
+
+This scatter plot compares the actual bike rental counts (y_test) to the predicted counts (y_pred) from the Linear Regression model. The red dashed diagonal line represents perfect predictions where actual equals predicted. Points clustered closely along this line indicate accurate predictions.
+
+## Insights:
+
+The model captures general trends in rental counts but shows some spread, indicating prediction errors.
+
+At higher rental counts, predictions tend to deviate more, suggesting the model struggles with extreme values.
+
+Overall, this plot confirms that the Linear Regression provides a reasonable baseline but has limitations in capturing complex patterns.
 ---
+
 
 ## 2. Random Forest Regressor
 
@@ -180,6 +197,25 @@ This dual approach supports both exploratory analysis and practical forecasting 
   - Midday spikes on weekends (casual users).  
   - Sharp drops in rentals during cold or humid conditions.
 
+
+# Random Forest: Actual vs Predicted Visualization
+
+  ![alt text](image-1.png)
+
+
+## Overview
+
+This scatter plot shows actual versus predicted rental counts from the Random Forest model, using green markers. Like the previous plot, the red dashed line represents perfect prediction.
+
+## Insights:
+
+The points are more tightly clustered along the diagonal compared to Linear Regression, indicating better prediction accuracy.
+
+The model handles extreme rental counts more effectively, reducing large prediction errors.
+
+This visualization supports that the Random Forest model captures nonlinear relationships and interactions, resulting in improved performance.
+
+## Overall Insights
 Both models provide valuable insights:
 
 - The Linear Regression model helps us understand general trends and directional influences (e.g., temperature increase leads to more rentals).
