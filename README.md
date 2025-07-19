@@ -31,6 +31,11 @@ The team has selected the Bike Sharing dataset by UC Irvine. Our analysis will l
 We sourced our raw dataset by downloading them from the links below: 
     - https://archive.ics.uci.edu/dataset/275/bike+sharing+dataset
 
+## Stakeholders
+    - Public Health
+    - City Staff
+    - Bike Sharing Staff
+
 # Project overview  
   
     - Requirements
@@ -65,7 +70,6 @@ The original raw data was aggregated on two hourly and daily basis and then extr
 
 ### Schema 
 
-```csv
 | Column     | Type       | Description                                                                                                                                                 |
 |------------|------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | instant    | Integer    | Record index                                                                                                                                                |
@@ -85,8 +89,6 @@ The original raw data was aggregated on two hourly and daily basis and then extr
 | casual     | Integer    | Count of casual users                                                                                                                                       |
 | registered | Integer    | Count of registered users                                                                                                                                   |
 | cnt        | Integer    | Count of total rental bikes including both casual and registered                                                                                            |
-
-```
 
 ### Summarizations Found in the Dataset
 
