@@ -105,6 +105,86 @@ The following table present key summarizations derived from the Bike Sharing dat
 
 ## Data Analysis (Linear Regression, Clustering)
 
+## Model Selection
+
+### Linear Regression with One-Hot Encoding
+
+- **Simplicity and Interpretability:**  
+  Linear regression provides clear insights into how each feature affects bike rentals. Using one-hot encoding ensures categorical variables like season and hour are properly represented.
+
+- **Baseline Benchmark:**  
+  Serves as a straightforward baseline to understand the main drivers of bike sharing usage.
+
+- **Feature Effect Insights:**  
+  Coefficients quantify the impact of each factor (e.g., temperature, working day) on rental counts, helping with business understanding.
+
+### Random Forest Regressor
+
+- **Captures Nonlinear Relationships and Interactions:**  
+  Real-world factors often interact in complex ways. Random forests model these nonlinear patterns without manual feature engineering.
+
+- **Improved Accuracy and Robustness:**  
+  Ensemble learning reduces overfitting, generally improving prediction quality over linear models.
+
+- **Feature Importance:**  
+  Identifies the most influential features driving bike rentals, aiding further analysis.
+
+### Summary
+
+Using both models provides a balance between interpretability and predictive performance:
+
+- The **linear regression model** helps explain *how* different factors influence ridership.
+- The **random forest model** captures complex patterns for more accurate predictions.
+
+This dual approach supports both exploratory analysis and practical forecasting needs.
+
+# Summary of Insights from the Models
+
+## 1. Linear Regression with One-Hot Encoding
+
+### What We Did:
+- Transformed categorical variables (`season`, `hr`, `workingday`) using one-hot encoding.
+- Trained a Linear Regression model on numeric + encoded features.
+
+### What It Tells Us:
+- Linearly additive effects: Assumes each feature independently affects bike rentals in a linear way.
+- Strong predictors:  
+  - Higher temperatures lead to more rentals.  
+  - Higher humidity leads to fewer rentals.
+- Hourly pattern:  
+  Rentals peak during morning and evening commute hours on weekdays.
+- Working day effect:  
+  Slightly higher rental counts on working days compared to weekends for registered users.
+- Limitations:  
+  Cannot capture nonlinear trends or interactions (e.g., "hour × weekend").
+
+---
+
+## 2. Random Forest Regressor
+
+### What We Did:
+- Used the same one-hot encoded features.
+- Trained a Random Forest model, which can automatically handle nonlinearities and feature interactions.
+
+### What It Tells Us:
+- Better predictive accuracy:  
+  Higher R² score than the Linear Regression model.
+- Captured nonlinear relationships and interactions:  
+  For example, how hour effects vary depending on whether it is a working day.
+- Important features:  
+  - Hour of day (`hr_xx`) is the strongest predictor of rental volume.  
+  - Temperature (`temp`, `atemp`) encourages more rentals when warmer.  
+  - `workingday` and `season` explain weekly and seasonal patterns.
+- Richer insights:  
+  - Peak usage during weekday rush hours (registered users).  
+  - Midday spikes on weekends (casual users).  
+  - Sharp drops in rentals during cold or humid conditions.
+
+Both models provide valuable insights:
+
+- The Linear Regression model helps us understand general trends and directional influences (e.g., temperature increase leads to more rentals).
+- The Random Forest model offers a more accurate and nuanced understanding of bike rental behavior, capturing complex interactions between time, weather, and work schedules.
+
 ## Visualizations
 
 ## Conclusion
