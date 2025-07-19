@@ -66,38 +66,40 @@ The original raw data was aggregated on two hourly and daily basis and then extr
 ### Schema 
 
 ```csv
-Column,Type,Description
-instant,Integer,Record index
-dteday,Date,Date
-season,Categorical,1: winter, 2: spring, 3: summer, 4: fall
-yr,Categorical,Year (0: 2011, 1: 2012)
-mnth,Categorical,Month (1 to 12)
-hr,Categorical,Hour (0 to 23)
-holiday,Binary,Whether the day is a holiday (from http://dchr.dc.gov/page/holiday-schedule)
-weekday,Categorical,Day of the week
-workingday,Binary,1 if the day is neither a weekend nor a holiday, 0 otherwise
-weathersit,Categorical,1: Clear, Few clouds, Partly cloudy, Partly cloudy
-temp,Continuous,Normalized temperature in Celsius. Derived via (t - t_min)/(t_max - t_min), t_min = -8, t_max = +39 (only in hourly scale)
-atemp,Continuous,Normalized feeling temperature in Celsius. Derived via (t - t_min)/(t_max - t_min), t_min = -16, t_max = +50 (only in hourly scale)
-hum,Continuous,Normalized humidity. Values are divided by 100 (max)
-windspeed,Continuous,Normalized wind speed. Values are divided by 67 (max)
-casual,Integer,Count of casual users
-registered,Integer,Count of registered users
-cnt,Integer,Count of total rental bikes including both casual and registered
+| Column     | Type       | Description                                                                                                                                                 |
+|------------|------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| instant    | Integer    | Record index                                                                                                                                                |
+| dteday     | Date       | Date                                                                                                                                                        |
+| season     | Categorical| 1: winter, 2: spring, 3: summer, 4: fall                                                                                                                     |
+| yr         | Categorical| Year (0: 2011, 1: 2012)                                                                                                                                      |
+| mnth       | Categorical| Month (1 to 12)                                                                                                                                              |
+| hr         | Categorical| Hour (0 to 23)                                                                                                                                               |
+| holiday    | Binary     | Whether the day is a holiday (from [DC holiday schedule](http://dchr.dc.gov/page/holiday-schedule))                                                        |
+| weekday    | Categorical| Day of the week                                                                                                                                              |
+| workingday | Binary     | 1 if the day is neither a weekend nor a holiday, 0 otherwise                                                                                                |
+| weathersit | Categorical| 1: Clear, Few clouds, Partly cloudy, Partly cloudy                                                                                                           |
+| temp       | Continuous | Normalized temperature in Celsius. Derived via (t - t_min)/(t_max - t_min), t_min = -8, t_max = +39 (only in hourly scale)                                 |
+| atemp      | Continuous | Normalized feeling temperature in Celsius. Derived via (t - t_min)/(t_max - t_min), t_min = -16, t_max = +50 (only in hourly scale)                        |
+| hum        | Continuous | Normalized humidity. Values are divided by 100 (max)                                                                                                        |
+| windspeed  | Continuous | Normalized wind speed. Values are divided by 67 (max)                                                                                                       |
+| casual     | Integer    | Count of casual users                                                                                                                                       |
+| registered | Integer    | Count of registered users                                                                                                                                   |
+| cnt        | Integer    | Count of total rental bikes including both casual and registered                                                                                            |
+
 ```
 
 ### Summarizations Found in the Dataset
 
 The following table present key summarizations derived from the Bike Sharing dataset. These summarizations provide a foundational understanding of the dataset's scope, including the number of bikers (registered vs. casual), the time span covered, and the completeness of the data. 
 
-```csv
-Question, Analysis
-How many years are in this data set?,There are two years in this dataset
-What is the time range of this dataset?,The timeline range for this data is between 2011-01-01 to 2012-12-31
-What is the total number of instances in the dataset?,17379
-What is the total number of columns?,13
-How many values are missing?,There are no missing values
-```
+| Question                                   | Analysis                                                  |
+|--------------------------------------------|------------------------------------------------------------|
+| How many years are in this data set?       | There are two years in this dataset                        |
+| What is the time range of this dataset?    | The timeline range for this data is between 2011-01-01 to 2012-12-31 |
+| What is the total number of instances in the dataset? | 17379                                          |
+| What is the total number of columns?       | 13                                                         |
+| How many values are missing?               | There are no missing values                                |
+
 
 ## Data Analysis (Linear Regression, Clustering)
 
