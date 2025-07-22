@@ -19,22 +19,16 @@ As part of the Data Sceince Certificate program at the University of Toronto's D
 # Business case
 
 
-The team has selected the Bike Sharing dataset by UC Irvine. Our analysis will look at weather factors and time of year to see how these variables affect the types of riders, registered vs. casual. 
-1. How do the percentages of casual vs registered depending on the day of week, i.e. workweek vs weekend?
-2. do holidays, low windspeed, high temperature increase casual ridership?
-3. Given a certain type of weather, how does time of the year or season affect ridership levels? 
-4. Does the rate of weather change affect ridership? 
-5. What time of the day on weekends vs weekdays, do we see the greatest increase in casual vs. registered ridership?
-6. Is there a variance in ridership levels that is caused by outliers? (Are there any errors in data collection from the machine that is tracking the data?) Checking any high spikes, and seeing what possible causes there could be for that spike. 
-7. What time of the day on weekends vs weekdays, do we see the greatest increase in casual vs. registered ridership?
+Our team has selected the Bike Sharing dataset and will be investigating “Usage Patterns and Optimization.” By analyzing when and under what conditions demand rises or falls, stakeholders like bike‑sharing companies can improve fleet allocation, municipal governing bodies and planning staff can efficiently organize infrastructure and maintenance, and public health initiatives can be strengthened by encouraging more people to choose cycling as a safe, reliable mode of transport. Stakeholders should note that this dataset is geographically and temporally limited to Washington D.C. and to the years 2011-2012.
+
+These are the research questions that we will be focussing on analysis upon for this project: 
+1. How do casual vs. registered ridership patterns vary based on time of day, day of the week and type of day (i.e. weekday, weekend, holiday)?
+2. How do weather conditions influence registered vs. casual ridership?
 
 We sourced our raw dataset by downloading them from the links below: 
     - https://archive.ics.uci.edu/dataset/275/bike+sharing+dataset
 
-## Stakeholders
-    - Public Health
-    - City Staff
-    - Bike Sharing Staff
+
 
 # Project overview  
   
@@ -54,7 +48,7 @@ We sourced our raw dataset by downloading them from the links below:
 
 This project uses the following Python libraries
     - Data cleaning: pandas, numpy
-    - Data exploring: (ADD IN REGRESSION HERE) 
+    - Data exploring: pandas, scikitlearn
     - Visualization: matplotlib, seaborn, 
 
 ## Exploratory Data Analysis
@@ -158,9 +152,9 @@ This dual approach supports both exploratory analysis and practical forecasting 
 - Limitations:  
   Cannot capture nonlinear trends or interactions (e.g., "hour × weekend").
 
-## Linear Regression: Actual vs Predicted Visualization
+### Linear Regression: Actual vs Predicted Visualization
 
-! [Linear Regression model](<Linear Regression.png>)
+![Linear Regression model](Images/Linear_Regression.png)
 
 
 ## Overview
@@ -174,7 +168,8 @@ The model captures general trends in rental counts but shows some spread, indica
 At higher rental counts, predictions tend to deviate more, suggesting the model struggles with extreme values.
 
 Overall, this plot confirms that the Linear Regression provides a reasonable baseline but has limitations in capturing complex patterns.
----
+
+--- 
 
 
 ## 2. Random Forest Regressor
@@ -198,16 +193,16 @@ Overall, this plot confirms that the Linear Regression provides a reasonable bas
   - Sharp drops in rentals during cold or humid conditions.
 
 
-# Random Forest: Actual vs Predicted Visualization
+### Random Forest: Actual vs Predicted Visualization
 
-  ![Random Forest Model]](<Random Forest.png>)
+![Random Forest Model](Images/Random_Forest.png) 
 
 
-## Overview
+### Overview
 
 This scatter plot shows actual versus predicted rental counts from the Random Forest model, using green markers. Like the previous plot, the red dashed line represents perfect prediction.
 
-## Insights:
+### Insights:
 
 The points are more tightly clustered along the diagonal compared to Linear Regression, indicating better prediction accuracy.
 
