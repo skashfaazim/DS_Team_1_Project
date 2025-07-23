@@ -18,17 +18,38 @@ As part of the Data Scince Certificate program at the University of Toronto's Da
 
 # Business case
 
+We analyze the Bike Sharing dataset to **predict when and under what conditions demand rises or falls**. This lets:
 
-Our team has selected the Bike Sharing dataset and will be investigating “Usage Patterns and Optimization.” By analyzing when and under what conditions demand rises or falls, stakeholders like bike‑sharing companies can improve fleet allocation, municipal governing bodies and planning staff can efficiently organize infrastructure and maintenance, and public health officials can implement initiatives (e.g. helmet safety campaigns) during peak ridership. Stakeholders should note that this dataset is spatiotemporally limited to Washington D.C. from 2011 to 2012 and findings might not be reflective of ridership trends in other cities or other years.
+- **Operations/Logistics** optimize bike/dock rebalancing and schedule maintenance in low-demand windows.  
+- **Marketing/Growth** time promotions to slow periods and boost conversion from casual to registered riders.  
+- **City planners/Public health** plan infrastructure and safety initiatives during peak use.
 
-These are the research questions that we will be focusing our analysis upon for this project: 
-1. How do casual vs. registered ridership patterns vary chronologically (based on time of day and day of the week)?
-2. How do casual vs.registered ridership patterns vary based on weather conditions (temperature, humidity, windspeed)?
+*Scope note:* Data are from Washington D.C. (2011–2012); patterns may not generalize to other cities or years.
+
+## Research Questions
+
+1. **How accurately can we predict total rentals (`cnt`) per day and per hour using weather and calendar/time features?**  
+2. **Which variables (e.g., temperature, weather, hour-of-day, season) most influence demand?**  
 
 We sourced our raw dataset by downloading from the link below: 
     - https://archive.ics.uci.edu/dataset/275/bike+sharing+dataset
 
+## Stakeholders & Value
 
+| Stakeholder         | Pain Point / Need                               | How Our Analysis Helps                                |
+|---------------------|--------------------------------------------------|--------------------------------------------------------|
+| Operations/Logistics| Empty/full docks; inefficient truck routing     | Hourly/daily forecasts → smarter rebalancing schedules |
+| Marketing/Growth    | When to promote; convert casual to registered   | Identify low-demand windows → targeted campaigns       |
+| Finance/Execs       | Budget & ROI on bikes/docks                     | Demand forecasts → evidence-based allocation           |
+| City Planners/Public Health | Plan infra & safety initiatives         | Usage patterns → data-informed decisions               |
+
+## Risks / Unknowns
+
+- **Data leakage:** `casual`/`registered` predicting `cnt` inflates performance (excluded in LR).  
+- **External events missing:** Concerts, policy changes, strikes not in dataset.  
+- **Linear assumptions:** Linearity & constant variance may be violated.  
+- **Temporal drift:** Patterns can change over years/locations.  
+- **Aggregation:** System-wide counts hide station-level issues.
 
 # Project overview  
   
