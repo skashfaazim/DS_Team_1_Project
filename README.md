@@ -222,16 +222,52 @@ Both models provide valuable insights:
 
 ## Visualizations
 
- 
-![Correlation Matrix](Visualization images/Correlation_Matrix.png)
+A correlation matrix is a simple table that shows how strongly related different things are to each other.
+Imagine you’re looking at things like temperature, bike rentals, wind speed, and humidity. A correlation matrix helps you see if, for example:
+When temperature goes up, do bike rentals also go up?
 
-![Density of Temp vs Total Rides by Season](Visualization images/Density_of_Temp_vs_Total_Rides_by_Season.png)
+Each cell in the matrix has a number between -1 and 1:
+•	1 means a perfect positive relationship (both go up together).
+•	-1 means a perfect negative relationship (one goes up, the other goes down).
+•	0 means no relationship.
 
-![Average Ridership by Season and Weather Type](Visualization images/Average_Ridership_by_Season_and_Weather_Type.png)
+The matrix is often color-coded, so you can quickly spot strong or weak relationships without reading every number.
+It’s a helpful way to find patterns in data and understand which factors might be influencing each other.
 
-![Average Ridership by Hour user type and working day](Visualization images/Average_Ridership_by_Hour_user_type_and_working_day.png)
+It is important to note:
+Correlation ≠ Causation: A strong correlation doesn't mean one variable causes the other.
+Outliers and non-linear relationships might distort correlation values.
+Multicollinearity: If two variables are too highly correlated (like temp and atemp), we may want to drop one in modeling.
 
-![Average Ridership by Hour user type and working day and weather](Visualization images/Average_Ridership_by_Hour_user_type_and_working_day_and_weather.png)
+![Correlation Matrix](Visualization_images/Correlation_Matrix.png)
+
+
+KDE plots for temperature vs total rides by season, similar to the scatter plots, but using KDE to visualize the density of points.
+Lighter areas for low-density regions are easier to ignore, dark high-density areas grab attention.
+Keep in mind that we are looking at total count. If we were to compare preferences given certain temperature and season, we should look at percentages.
+
+
+![Density of Temp vs Total Rides by Season](Visualization_images/Density_of_Temp_vs_Total_Rides_by_Season.png)
+
+
+Here we evaluate the amount of rides given a certain type of weather at a certain season.
+
+![Average Ridership by Season and Weather Type](Visualization_images/Average_Ridership_by_Season_and_Weather_Type.png)
+
+
+This graph highlights the different behaviors of registered and casual riders, not only between the two user types but also depending on whether it is a working day or not.
+Registered riders display two distinct peaks: one around 8 a.m. and another around 5:30 p.m. on working days. In contrast, the other user types and day combinations do not show such abrupt peaks, with usage generally concentrated between 7 a.m. and 9 p.m.
+
+Average Ridership by Hour (Working Day = 1, Non-Working Day = 0)
+
+![Average Ridership by Hour user type and working day](Visualization_images/Average_Ridership_by_Hour_user_type_and_working_day.png)
+
+
+Average Ridership by Hour (Working Day = 1, Non-Working Day = 0)
+
+The following graph illustrates the impact of varying weather conditions on ridership patterns, with severe weather events resulting in significant deviations from typical usage trends.
+
+![Average Ridership by Hour user type and working day and weather](Visualization_images/Average_Ridership_by_Hour_user_type_and_working_day_and_weather.png)
 
 
 
