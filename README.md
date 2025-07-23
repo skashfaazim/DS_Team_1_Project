@@ -222,4 +222,17 @@ Both models provide valuable insights:
 
 ## Visualizations
 
+ 
+![Correlation Matrix](Visualization images/Correlation_Matrix.png)
+
+![Density of Temp vs Total Rides by Season](Visualization images/Density_of_Temp_vs_Total_Rides_by_Season.png)
+
+![Average Ridership by Season and Weather Type](Visualization images/Average_Ridership_by_Season_and_Weather_Type.png)
+
+![Average Ridership by Hour user type and working day](Visualization images/Average_Ridership_by_Hour_user_type_and_working_day.png)
+
+![Average Ridership by Hour user type and working day and weather](Visualization images/Average_Ridership_by_Hour_user_type_and_working_day_and_weather.png)
+
+
+
 ## Conclusion
