@@ -28,8 +28,8 @@ We analyze the Bike Sharing dataset to **predict when and under what conditions 
 
 ## Research Questions
 
-1. **How accurately can we predict total rentals (`cnt`) per day and per hour using weather and calendar/time features?**  
-2. **Which variables (e.g., temperature, weather, hour-of-day, season) most influence demand?**  
+1. **Prediction Accuracy:** How accurately can we predict total rentals (`cnt`) per day and per hour using weather and calendar/time features? 
+2. **Key Drivers:** Which variables (e.g., temperature, weather, hour-of-day, season) most influence demand? 
 
 We sourced our raw dataset by downloading from the link below: 
     - https://archive.ics.uci.edu/dataset/275/bike+sharing+dataset
@@ -126,16 +126,23 @@ To explore the dynamic features download the (INSERT FILE NAME) file in our repo
 
 ## Model Selection
 
-### Linear Regression with One-Hot Encoding
+### Linear Regression (with One-Hot Encoding)
 
-- **Simplicity and Interpretability:**  
-  Linear regression provides clear insights into how each feature affects bike rentals. Using one-hot encoding ensures categorical variables like season and hour are properly represented.
+- **Why this model?** Simple, interpretable baseline. One-hot encoding lets us include categorical drivers (season, month, hour, weather) correctly.  
+- **Preprocessing:** OneHotEncoder for categorical codes + StandardScaler for numeric (temp, atemp, hum, windspeed).  
+- **Performance:**  
+  | Model  | R²    | RMSE  | MAE  |
+  |--------|-------|-------|------|
+  | Daily  | 0.842 | 796.5 | 583.0 |
+  | Hourly | 0.681 | 100.4 | 74.1 |
 
-- **Baseline Benchmark:**  
-  Serves as a straightforward baseline to understand the main drivers of bike sharing usage.
+- **Key drivers (|coef|):**  
+  - **Daily:** Bad weather ↓ (weathersit_3), winter ↓, temp ↑, fall ↑, Sep ↑, Sunday ↑  
+  - **Hourly:** Peaks at 08:00 & 17–18; lows 0–6; worst weather ↓
 
-- **Feature Effect Insights:**  
-  Coefficients quantify the impact of each factor (e.g., temperature, working day) on rental counts, helping with business understanding.
+- **Limitations:** Assumes linear, additive effects and constant variance; residuals show some heteroscedasticity → consider Ridge/Lasso or tree models next.
+
+> Full details (diagnostics, plots, coefficients, recommendations) in `reports/linear_model_findings.md`.
 
 ### Random Forest Regressor
 
