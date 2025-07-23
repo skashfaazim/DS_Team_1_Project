@@ -4,7 +4,7 @@
 
 Data Science Institute - Cohort 6 - Team 1 Project
 
-As part of the Data Sceince Certificate program at the University of Toronto's Data Science Institute, our capstone project was (INSERT 1 SENTENCE BUSINESS CASE HERE). We chose the "Bike Sharing" dataset to apply our analytical and technical skills to. To complete our final project, we summarized the data, performed exploratory analysis' such as (INSERT CHOSEN REGRESSION MODEL HERE), created visualizations to present actionable insights. This project demonstrated all the skills that we have learned through the certificate program. 
+As part of the Data Scince Certificate program at the University of Toronto's Data Science Institute, our capstone project was (INSERT 1 SENTENCE BUSINESS CASE HERE). We chose the "Bike Sharing" dataset to apply our analytical and technical skills to. To complete our final project, we summarized the data, performed exploratory analysis' such as (INSERT CHOSEN REGRESSION MODEL HERE), created visualizations to present actionable insights. This project demonstrated all the skills that we have learned through the certificate program. 
 
 
 ## Members
@@ -19,13 +19,13 @@ As part of the Data Sceince Certificate program at the University of Toronto's D
 # Business case
 
 
-Our team has selected the Bike Sharing dataset and will be investigating “Usage Patterns and Optimization.” By analyzing when and under what conditions demand rises or falls, stakeholders like bike‑sharing companies can improve fleet allocation, municipal governing bodies and planning staff can efficiently organize infrastructure and maintenance, and public health initiatives can be strengthened by encouraging more people to choose cycling as a safe, reliable mode of transport. Stakeholders should note that this dataset is geographically and temporally limited to Washington D.C. and to the years 2011-2012.
+Our team has selected the Bike Sharing dataset and will be investigating “Usage Patterns and Optimization.” By analyzing when and under what conditions demand rises or falls, stakeholders like bike‑sharing companies can improve fleet allocation, municipal governing bodies and planning staff can efficiently organize infrastructure and maintenance, and public health officials can implement initiatives (e.g. helmet safety campaigns) during peak ridership. Stakeholders should note that this dataset is spatiotemporally limited to Washington D.C. from 2011 to 2012 and findings might not be reflective of ridership trends in other cities or other years.
 
-These are the research questions that we will be focussing on analysis upon for this project: 
-1. How do casual vs. registered ridership patterns vary based on time of day, day of the week and type of day (i.e. weekday, weekend, holiday)?
-2. How do weather conditions influence registered vs. casual ridership?
+These are the research questions that we will be focusing our analysis upon for this project: 
+1. How do casual vs. registered ridership patterns vary chronologically (based on time of day and day of the week)?
+2. How do casual vs.registered ridership patterns vary based on weather conditions (temperature, humidity, windspeed)?
 
-We sourced our raw dataset by downloading them from the links below: 
+We sourced our raw dataset by downloading from the link below: 
     - https://archive.ics.uci.edu/dataset/275/bike+sharing+dataset
 
 
@@ -49,13 +49,8 @@ We sourced our raw dataset by downloading them from the links below:
 This project uses the following Python libraries
     - Data cleaning: pandas, numpy
     - Data exploring: pandas, scikitlearn
-    - Visualization: matplotlib, seaborn, 
+    - Visualization: matplotlib, seaborn
 
-## Exploratory Data Analysis
-
-The following libraries: pandas, numpy, matplotlib.pyplot, and seaborn were used to generate an overview of the dataset, revealing (ADD IN TOPICS THAT IT REVEALED HERE). We were also able to determine that there were 17,379 rows and 17 columns in the data, and that there were no missing values in the dataset. Seaborn and MatPlotlib was used to create visualizations such as (ASK ANA FOR TYPES OF GRAPHS) heatmaps, scatter plots, bargraphs, and histograms to highlight relationships and trends in the data.
-
-To explore the dynamic features download the (INSERT FILE NAME) file in our repo. 
 
 ## Understanding the Raw Data
 Bike-sharing rental process is highly correlated to the environmental and seasonal settings. For instance, weather conditions, precipitation, day of week, season, hour of the day, etc. can affect the rental behaviors. The core data set is related to the two-year historical log corresponding to years 2011 and 2012 from Capital Bikeshare system, Washington D.C., USA which is publicly available in http://capitalbikeshare.com/system-data.
@@ -95,6 +90,15 @@ The following table present key summarizations derived from the Bike Sharing dat
 | What is the total number of instances in the dataset? | 17379                                          |
 | What is the total number of columns?       | 13                                                         |
 | How many values are missing?               | There are no missing values                                |
+
+
+## Exploratory Data Analysis
+
+Pandas, numpy, matplotlib.pyplot, and seaborn libraries were used for exploratory data analysis visualizations, including heatmaps, scatter plots, bar graphs, and histograms, which were then reviewed by the team members to investigate trends and relationships in the dataset. In particular, we noticed that:
+-Total count of riders was mostly represented by registered riders (accounting for >80%), as opposed to casual riders.
+-Registered ridership peaked on weekdays during rush hour, while casual ridership peaked mid-afternoon on weekends.
+
+To explore the dynamic features download the (INSERT FILE NAME) file in our repo. 
 
 
 ## Data Analysis (Linear Regression, Clustering)
