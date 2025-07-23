@@ -4,7 +4,7 @@
 
 Data Science Institute - Cohort 6 - Team 1 Project
 
-As part of the Data Scince Certificate program at the University of Toronto's Data Science Institute, our capstone project was (INSERT 1 SENTENCE BUSINESS CASE HERE). We chose the "Bike Sharing" dataset to apply our analytical and technical skills to. To complete our final project, we summarized the data, performed exploratory analysis' such as (INSERT CHOSEN REGRESSION MODEL HERE), created visualizations to present actionable insights. This project demonstrated all the skills that we have learned through the certificate program. 
+As part of the Data Scince Certificate program at the University of Toronto's Data Science Institute, our capstone project allowed us to showcase our technical skills that we have developed over this certificate program . We chose the "Bike Sharing" dataset to apply our analytical and technical skills to. To complete our final project, we summarized the data, performed exploratory analysis', and created visualizations to present actionable insights. 
 
 
 ## Members
@@ -188,18 +188,17 @@ This dual approach supports both exploratory analysis and practical forecasting 
 
 ![Linear Regression model](Images/Linear_Regression.png)
 
+#### Overview
 
-## Overview
+This scatter plot visualizes the performance of a linear regression model by comparing the actual bike rental counts (y_test) with the model’s predicted values (y_pred). Each point represents one prediction, while the red dashed diagonal indicates perfect predictions where actual equals predicted.
 
-This scatter plot compares the actual bike rental counts (y_test) to the predicted counts (y_pred) from the Linear Regression model. The red dashed diagonal line represents perfect predictions where actual equals predicted. Points clustered closely along this line indicate accurate predictions.
+#### Insights:
 
-## Insights:
+The model shows a generally strong upward trend, indicating that it has learned meaningful patterns from the data. 
 
-The model captures general trends in rental counts but shows some spread, indicating prediction errors.
+However, there is visible underprediction at higher rental counts, as many points fall below the diagonal line. This suggests that the model struggles to fully capture peak demand, likely due to its linear nature. 
 
-At higher rental counts, predictions tend to deviate more, suggesting the model struggles with extreme values.
-
-Overall, this plot confirms that the Linear Regression provides a reasonable baseline but has limitations in capturing complex patterns.
+While the R² score of 0.6162 reflects moderate predictive power, the spread in higher-value predictions indicates room for improvement — particularly by exploring nonlinear models or engineering more informative features.
 
 --- 
 
@@ -217,7 +216,7 @@ Overall, this plot confirms that the Linear Regression provides a reasonable bas
   For example, how hour effects vary depending on whether it is a working day.
 - Important features:  
   - Hour of day (`hr_xx`) is the strongest predictor of rental volume.  
-  - Temperature (`temp`, `atemp`) encourages more rentals when warmer.  
+  - Temperature (`temp`) encourages more rentals when warmer.  
   - `workingday` and `season` explain weekly and seasonal patterns.
 - Richer insights:  
   - Peak usage during weekday rush hours (registered users).  
@@ -230,17 +229,18 @@ Overall, this plot confirms that the Linear Regression provides a reasonable bas
 ![Random Forest Model](Images/Random_Forest.png) 
 
 
-### Overview
+#### Overview
 
-This scatter plot shows actual versus predicted rental counts from the Random Forest model, using green markers. Like the previous plot, the red dashed line represents perfect prediction.
+This scatter plot compares the actual bike rental counts (y_test) with the predicted counts from a Random Forest regression model (y_pred). Each green point represents a single prediction, and the red dashed diagonal line represents perfect predictions where actual and predicted counts are equal.
 
-### Insights:
+#### Insights:
 
-The points are more tightly clustered along the diagonal compared to Linear Regression, indicating better prediction accuracy.
+The plot shows a strong alignment along the diagonal, indicating that the Random Forest model captures the underlying data patterns more effectively than a linear model. 
 
-The model handles extreme rental counts more effectively, reducing large prediction errors.
+Predictions are more accurate across both low and high rental counts, with less systematic underprediction at peak values. 
 
-This visualization supports that the Random Forest model captures nonlinear relationships and interactions, resulting in improved performance.
+Although some variance and scatter remain, particularly at higher rental counts, the model demonstrates improved predictive power and robustness, making it better suited to modeling the complex, nonlinear relationships in bike rental demand.
+
 
 ## Overall Insights
 Both models provide valuable insights:
