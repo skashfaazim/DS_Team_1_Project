@@ -36,7 +36,9 @@ _This analysis focuses on the Capital Bikeshare system (Washington D.C., 2011–
 ## Research Questions
 
 1. **Prediction Accuracy:** How accurately can we predict total rentals (`cnt`) per day and per hour using weather and calendar/time features? 
-2. **Key Drivers:** Which variables (e.g., temperature, weather, hour-of-day, season) most influence demand? 
+2. **Key Drivers:** Which variables (e.g., temperature, weather, hour-of-day, season) most influence demand?
+3. **Rider Segment Patterns:** How do **casual vs. registered** riders differ in their daily and hourly usage patterns and what drives each group?
+4. **Day-Type Patterns:** How do **working vs. non-working** days affect rental patterns at both daily and hourly resolutions, and what are the key drivers in each segment?  
 
 We sourced our raw dataset by downloading from the link below: 
     - https://archive.ics.uci.edu/dataset/275/bike+sharing+dataset
@@ -262,25 +264,9 @@ To explore the dynamic features download the (INSERT FILE NAME) file in our repo
 
 ## Model Selection
 
-### Linear Regression (with One-Hot Encoding)
+### A. Linear Regression Results: Combined vs. Separate Daily & Hourly Models
 
-- **Why this model?** Simple, interpretable baseline. One-hot encoding lets us include categorical drivers (season, month, hour, weather) correctly.  
-- **Preprocessing:** OneHotEncoder for categorical codes + StandardScaler for numeric (temp, atemp, hum, windspeed).  
-- **Performance:**  
-  | Model  | R²    | RMSE  | MAE  |
-  |--------|-------|-------|------|
-  | Daily  | 0.842 | 796.5 | 583.0 |
-  | Hourly | 0.681 | 100.4 | 74.1 |
-
-- **Key drivers (|coef|):**  
-  - **Daily:** Bad weather ↓ (weathersit_3), winter ↓, temp ↑, fall ↑, Sep ↑, Sunday ↑  
-  - **Hourly:** Peaks at 08:00 & 17–18; lows 0–6; worst weather ↓
-
-- **Limitations:** Assumes linear, additive effects and constant variance; residuals show some heteroscedasticity → consider Ridge/Lasso or tree models next.
-
-> Full details (diagnostics, plots, coefficients, recommendations) in `reports/linear_model_findings.md`.
-
-### Random Forest Regressor
+### B. Random Forest Regressor
 
 - **Captures Nonlinear Relationships and Interactions:**  
   Real-world factors often interact in complex ways. Random forests model these nonlinear patterns without manual feature engineering.
@@ -302,7 +288,7 @@ This dual approach supports both exploratory analysis and practical forecasting 
 
 # Summary of Insights from the Models
 
-## 1. Linear Regression with One-Hot Encoding
+## 1. Linear Regression with One-Hot Encoding (Combined Day and Hour)
 
 ### What We Did:
 - Transformed categorical variables (`season`, `hr`, `workingday`) using one-hot encoding.
@@ -320,7 +306,83 @@ This dual approach supports both exploratory analysis and practical forecasting 
 - Limitations:  
   Cannot capture nonlinear trends or interactions (e.g., "hour × weekend").
 
-### Linear Regression: Actual vs Predicted Visualization
+### Linear Regression Results (Daily & Hourly)
+### 1. Objective  
+Predict total rentals (`cnt`) using weather and calendar/time features, then translate insights into operational recommendations.
+
+### 2. Data & Method  
+- **Datasets:** `day.csv`, `hour.csv`  
+- **Target:** `cnt`  
+- **Dropped cols:** `instant`, `dteday`, `casual`, `registered`, `cnt`  
+- **Pipeline:** One-hot encode categorical + scale numeric → LinearRegression  
+- **Split:** 80% train / 20% test  
+
+### 3. Performance  
+
+| Model  | R²    | RMSE  | MAE   |
+| ------ | ----- | ----- | ----- |
+| Daily  | 0.842 | 796.5 | 583.0 |
+| Hourly | 0.681 | 100.4 |  74.1 |
+
+### 4. Key Drivers
+
+#### Daily Model  
+- **− Weather (weathersit_3):** −1,048 rentals  
+- **+ Year (yr_1):** +991 rentals  
+- **− Winter vs + Fall:** −856 vs +798  
+- **+ Clear weather (weathersit_1):** +778  
+- **+ Temperature:** +686 per 1 SD  
+- **Month effects:** Sep +639; Jul −484  
+- **+ Sunday:** +286  
+
+#### Hourly Model  
+- **+ Hr 17 (5 PM):** +257; Hr 18 +217; Hr 8 +191  
+- **− Hr 0–6:** −125 to −165 (overnight)  
+- **− Worst weather (weathersit_4):** −77  
+
+**Takeaways:** Bad weather & winter cut demand; warmth, fall & clear days boost it. Commute-hour spikes drive hourly patterns.
+
+### 5. Residual Diagnostics  
+- **Daily:** residuals centered around zero; mild non-linearity at extremes  
+- **Hourly:** residual variance ↑ with fitted values (heteroscedasticity)
+
+### 6. Segment Analyses
+
+#### 6.1 Casual vs Registered  
+- **Daily R²:** Reg 0.846 vs Cas 0.707  
+- **Hourly R²:** Reg 0.676 vs Cas 0.585  
+- **Patterns:** Reg riders peak commuter hours; casual riders flatter late-day/weekends  
+- **Top Drivers (Daily):**  
+  - **Casual:** Temp +336; Sunday +270; Fall +210; Working day −297  
+  - **Registered:** Weather_3 −851; Yr_1 +851; Fall +817; Winter −772  
+- **Top Drivers (Hourly):**  
+  - **Casual:** Hr 17 +32; Hr 13–16 +29–31  
+  - **Registered:** Hr 17 +225; Hr 8 +199; Hr 18 +197; Overnight (2–4 AM) −135  
+
+#### 6.2 Working vs Non-Working  
+- **Daily R²:** Work 0.822 vs Non 0.811  
+- **Hourly R²:** Work 0.838 vs Non 0.778  
+- **Patterns:** Workdays—sharp 8 AM/5 PM peaks; Non-Workdays—broad midday & Sunday surge  
+- **Top Drivers (Daily):**  
+  - **Working:** Feels-like temp +1,061; Yr ±1,037; Weather_3 −995  
+  - **Non-Working:** Sunday +1,275; Dec −1,615; Weather_3 −1,516  
+- **Top Drivers (Hourly):**  
+  - **Working:** Hr 17 +317; Hr 8 +301; Hr 18 +289; Overnight (3–4 AM) −172 to −178  
+  - **Non-Working:** Hr 12–15 +166–167; Hr 4 −151  
+
+---
+
+## Recommendations
+1. **Rebalancing:** target commute peaks; schedule maintenance overnight.  
+2. **Weather-aware ops:** adjust staffing/routes on bad-weather days; promote riding on clear days.  
+3. **Seasonal campaigns:** launch before spring/fall spikes.  
+4. **Segmentation:** model casual vs registered separately for tailored strategies.  
+
+---
+
+## Appendix  
+See on "development" branch: `notebooks/linear_models.ipynb` for full code and workflow outline.  
+### B. Linear Regression: Actual vs Predicted Visualization
 
 ![Linear Regression model](Images/Linear_Regression.png)
 
@@ -338,7 +400,7 @@ While the R² score of 0.6162 reflects moderate predictive power, the spread in 
 
 --- 
 
-## 2. Random Forest Regressor
+## C. Random Forest Regressor
 
 ### What We Did:
 - Used the same one-hot encoded features.
