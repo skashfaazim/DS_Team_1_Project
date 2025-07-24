@@ -8,11 +8,11 @@ Predict total bike rentals (`cnt`) using weather and calendar/time features at *
 
 ## 2. Data & Method (brief)
 
-- Datasets: `day.csv`, `hour.csv` (UCI Bike Sharing).
-- Target: `cnt` (total rentals).
-- Dropped leakage/ID cols: `instant`, `dteday`, `casual`, `registered`, `cnt`.
-- Pipeline: OneHotEncode categorical codes (season, mnth, hr, etc.) + StandardScale numeric vars (temp, atemp, hum, windspeed) → LinearRegression.
-- Split: 80/20 train-test.
+- **Datasets:** `day.csv`, `hour.csv` (UCI Bike Sharing)
+- **Target:** `cnt` (total rentals)
+- **Dropped columns:** `instant`, `dteday`, `casual`, `registered`, `cnt` (IDs & leakage)
+- **Pipeline:** One-hot encode categorical (season, mnth, hr, etc.) + standard-scale numeric (temp, atemp, hum, windspeed) → LinearRegression
+- **Split:** 80% train / 20% test
 
 ---
 
@@ -23,82 +23,84 @@ Predict total bike rentals (`cnt`) using weather and calendar/time features at *
 | Daily  | 0.842 | 796.5 | 583.0 |
 | Hourly | 0.681 | 100.4 | 74.1  |
 
-_(RMSE/MAE are in rental counts.)_
-
 ---
 
-## 4. Key Drivers (|coef| top contributors)
+## 4. Key Drivers
 
 ### Daily Model
 
-- **− weathersit_3** (light snow / heavy rain): −1048 → sharp drop in demand
-- **+ yr_1** (2012 vs 2011): +991 → demand grew year-over-year
-- **− yr_0** (2011 baseline): −991 (mirror of above dummy)
-- **− season_1** (winter): −856; **+ season_4** (fall): +798
-- **+ weathersit_1** (clear weather): +778
-- **+ temp**: +686 (warmer days = more rides)
-- **mnth effects:** + mnth_9 (Sep) +639; − mnth_7 (Jul) −484; etc.
-- **+ weekday_6** (Sunday): +286 (higher weekend usage)
+- **− Weather (weathersit_3):** −1,048 rentals
+- **+ Year (yr_1):** +991 rentals (2012 vs 2011)
+- **− Winter (season_1):** −856 rentals; **+ Fall (season_4):** +798
+- **+ Clear weather (weathersit_1):** +778 rentals
+- **+ Temperature:** +686 rentals per 1 SD increase
+- **Month effects:** Sep (+639), Jul (−484), etc.
+- **+ Sunday (weekday_6):** +286 rentals
 
 ### Hourly Model
 
-- **+ hr_17 (+257), hr_18 (+217), hr_8 (+191)** → commute peaks
-- **− hr_0 ~ hr_6** (e.g., hr_4 −165) → off-hours low demand
-- **− weathersit_4** (worst weather): −77
+- **+ Hour 17 (5 PM):** +257; **Hour 18:** +217; **Hour 8:** +191
+- **− Hours 0–6:** −125 to −165 rentals (overnight)
+- **− Worst weather (weathersit_4):** −77 rentals
 
-**Takeaways:**
-
-- Weather & temperature strongly influence demand (bad weather ↓, warmth ↑).
-- Clear temporal patterns: year-over-year growth, fall > winter, commute-hour spikes.
+**Takeaways:**  
+Bad weather and winter sharply reduce demand; warmth, fall and clear days boost it. Commute‐hour spikes dominate hourly patterns.
 
 ---
 
 ## 5. Residual Diagnostics
 
-- (Insert short note after reviewing plots) e.g.:
-  - Daily residuals: fairly homoscedastic, mild non-linearity at extremes.
-  - Hourly residuals: variance increases at higher fitted values (heteroscedasticity); suggests non-linear/interaction effects.
+- **Daily:** residuals evenly scattered around zero; slight non-linearity at extremes
+- **Hourly:** residual variance grows with predicted values (heteroscedasticity), suggesting non-linear effects
 
 ---
 
-## 6. Recommendations
+## 6. Segment Analyses
 
-1. **Operational Rebalancing:** Ensure bike/dock availability around 08:00 and 17:00–18:00; schedule maintenance in low-demand windows (late night/early morning).
-2. **Weather-Aware Planning:** Use forecasts to adjust truck routes and staffing; push in-app promos on clear/warm days.
-3. **Seasonal Campaigns:** Launch membership/marketing before demand spikes (spring/fall).
-4. **Segmentation Next:** Model **casual vs registered** separately for tailored marketing and retention strategies.
-5. **Model Improvements:** Try Ridge/Lasso or tree-based models (RF/XGB) for non-linearity; add lag features and event data; consider time-series CV.
+### 6.1 Casual vs Registered
 
----
+- **Predictive Power:** Daily R²—Registered 0.846 vs Casual 0.707; Hourly R²—Registered 0.676 vs Casual 0.585
+- **Patterns:** Registered riders peak at commute hours; casual riders have a flatter late-day profile and spike on weekends
 
-## 7. Risks / Unknowns
+**Daily Drivers (Casual):** Temperature +336; Sunday +270; Fall (Oct) +210; Working day −297  
+**Daily Drivers (Registered):** Bad weather −851; Year +851; Fall +817; Winter −772
 
-- **Data leakage:** Using `casual`/`registered` would inflate scores (we excluded).
-- **External events missing:** Concerts, strikes, policy changes not in data.
-- **Model assumptions:** Linearity & constant variance not guaranteed.
-- **Temporal drift:** Usage patterns may shift across years.
-- **System-wide vs station-level:** Aggregation hides local shortages/excess.
+**Hourly Drivers (Casual):** Hour 17 +32; Hours 13–16 +29–31  
+**Hourly Drivers (Registered):** Hour 17 +225; Hour 8 +199; Hour 18 +197; Overnight (hr 2–4) −135 to −137
 
----
+### 6.2 Working vs Non-Working
 
-## 8. Next Steps
+- **Predictive Power:** Daily R²—Working 0.822 vs Non-Working 0.811; Hourly R²—Working 0.838 vs Non-Working 0.778
+- **Patterns:** Working days show sharp 8 AM/5 PM peaks; non-working days have a broad midday plateau and strong Sunday surge
 
-- Add non-linear models & compare.
-- Incorporate external/event features.
-- Time-series validation (rolling splits).
-- Produce stakeholder-specific dashboards.
+**Daily Drivers (Working):** Feels-like temp +1,061; Year ±1,037; Bad weather −995  
+**Daily Drivers (Non-Working):** Sunday +1,275; December −1,615; Bad weather −1,516
+
+**Hourly Drivers (Working):** Hour 17 +317; Hour 8 +301; Hour 18 +289; Overnight troughs (hr 3–4) −172 to −178  
+**Hourly Drivers (Non-Working):** Hours 12–15 +166–167; Early-morning trough (hr 4) −151
 
 ---
 
-## Appendix: Notebook Outline (`notebooks/linear_models.ipynb`)
+## 7. Recommendations
 
-1. Objective & Data Sources
-2. Imports & Paths
-3. Load & Quick Check
-4. Prep Features/Targets (Daily & Hourly)
-5. Pipeline + Train/Test Split
-6. Fit & Evaluate (R², RMSE, MAE)
-7. Diagnostics Plots (Pred vs Actual, Residuals)
-8. Top Coefficients / Feature Importance
-9. Save Figures & Outputs
-10. Key Findings (summarized here)
+1. **Rebalancing:** Focus on 8 AM & 5–6 PM; perform maintenance overnight/low-demand hours.
+2. **Weather-aware ops:** Adjust routes & staffing on bad-weather days; promote riding on clear/warm days.
+3. **Seasonal campaigns:** Launch before spring/fall demand spikes.
+4. **Segmentation:** Build separate models for casual vs registered riders.
+5. **Model improvements:** Experiment with non-linear models and time-series validation.
+
+---
+
+## 8. Risks / Unknowns
+
+- Data leakage if `casual`/`registered` are used as predictors
+- External events (concerts, strikes) not captured
+- Linear assumptions (linearity, constant variance) may be violated
+- Usage patterns may shift across years or cities
+- System-level aggregation hides station-level issues
+
+---
+
+## Appendix
+
+See `notebooks/linear_models.ipynb` for full code and workflow outline.
