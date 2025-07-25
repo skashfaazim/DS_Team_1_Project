@@ -334,8 +334,8 @@ The team created extra visualizations from our exploratory analysis and extra pr
 
 # Team Videos
 
-  - [Rachel] 
+  - [Rachel] (https://drive.google.com/file/d/1BS6RaEZcYRNbyn6TH7eBCgZ_qF-J3bLr/view?usp=sharing)
   - [Muhammed]
-  - [Ana]
+  - [Ana] (https://drive.google.com/file/d/1Gq4eOV5Hb4JFMg9mEFeShJ1lYsSjZOeX/view?usp=sharing)
   - [Kashfa]
   - [Jonah]
