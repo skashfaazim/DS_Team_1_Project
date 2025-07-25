@@ -4,7 +4,7 @@ _Data Science Institute – Cohort 6 – Team 1 Capstone Project_
 
 As part of the University of Toronto’s Data Science Certificate program, our team analyzed the [Bike Sharing Dataset](https://archive.ics.uci.edu/dataset/275/bike+sharing+dataset) to deliver **actionable, data‑driven insights** for operational planning, marketing strategy, and urban policy.
 
-** Key Takeaways:**
+**Key Takeaways:**
 - **Predicted hourly and daily demand** using weather and calendar data.
 - **Identified key drivers** (temperature, humidity, season, hour of day).
 - **Clustered usage patterns** to distinguish peak vs. off‑peak behaviors.
@@ -173,8 +173,7 @@ We reviewed all exploratory visualizations as a team to elucidate the following 
 
 These insights directly informed feature engineering and guided our modeling choices.
 
-- 
-
+---
 
 ## Data Analysis (Linear Regression, Random Forest, Clustering, Forecasting & Anomaly Detection)
 
