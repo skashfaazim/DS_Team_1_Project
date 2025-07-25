@@ -175,11 +175,11 @@ These insights directly informed feature engineering and guided our modeling cho
 
 ---
 
-## Data Analysis (Linear Regression, Random Forest, Clustering, Forecasting & Anomaly Detection)
+## Data Analysis (Linear Regression & Random Forest)
 
 ### Model Selection
 
-### A. Linear Regression Results: Combined vs. Separate Daily & Hourly Models
+### A. Linear Regression Results: Combined vs. Separate Hourly Model
 
 ### B. Random Forest Regressor
 
