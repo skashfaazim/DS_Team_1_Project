@@ -54,12 +54,11 @@ We sourced our raw dataset by downloading from the link below:
 
 ## Risks / Unknowns
 
-- **Data leakage:** `casual`/`registered` predicting `cnt` inflates performance (excluded in LR).  
-- **External events missing:** Concerts, policy changes, strikes, extreme weather dates not in dataset.  
-- **Linear assumptions:** Linearity & constant variance may be violated, unable to assess due to timeline restraints. 
-- **Temporal drift:** Patterns can change over years/locations.  
-- **Aggregation:** System-wide counts hide station-level issues, and individual usage count data
-**Technological change:** Due to evolution of data counting and collection technology, data that is older than 10+ may be outdated
+- **External events missing:** Concerts, policy changes, strikes, extreme weather dates not in dataset.   
+- **Temporal drift:** Patterns can change over years/locations.
+- **Aggregation:** System-wide counts hide station-level issues, and individual usage count data.
+- **Technological change:** Due to evolution of data counting and collection technology, data that is older than 10 years may be outdated.
+- **Linear assumptions:** Linearity & constant variance may be violated, unable to assess due to timeline restraints.
 
 
 # Project overview  
@@ -86,8 +85,8 @@ This project uses the following Python libraries:
 
 
 ## Understanding the Raw Data
-Bike-sharing rental process is highly correlated to the environmental and seasonal settings. For instance, weather conditions, precipitation, day of week, season, hour of the day, etc. can affect the rental behaviors. The core data set is related to the two-year historical log corresponding to years 2011 and 2012 from Capital Bikeshare system, Washington D.C., USA.
-The original raw data was aggregated on two hourly and daily basis and then extracted and added the corresponding weather and seasonal information. Weather information are extracted from http://www.freemeteo.com. 
+Bike-sharing rental process is highly correlated to the environmental and seasonal settings. For instance, weather conditions, precipitation, day of week, season, hour of the day, etc. can affect the rental behaviours. The core data set is related to the two-year historical log corresponding to years 2011 and 2012 from Capital Bikeshare system, Washington D.C., USA.
+The original raw data was aggregated on by hour and day and then extracted and added the corresponding weather and seasonal information. Weather information are extracted from http://www.freemeteo.com. 
 
 ### Schema 
 
