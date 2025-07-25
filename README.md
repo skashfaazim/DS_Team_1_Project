@@ -132,132 +132,58 @@ The following table present key summarizations derived from the Bike Sharing dat
 
 ## Exploratory Data Analysis (EDA)
 
-To understand the dataset before modeling, we performed a comprehensive EDA.  
-Our aim was to uncover **temporal patterns**, **seasonality**, **weather impacts**, and **relationships among variables** that drive bike rental behavior.
+To understand the dataset before modeling, we performed a comprehensive EDA, creating visualizations such as heatmaps, scatter plots, bar graphs, and histograms, which were then reviewed by the team members to investigate trends and relationships in the dataset.
+
+Our aim was to uncover temporal patterns, seasonality, weather impacts, and relationships among variables that drive bike rental behavior.
 
 ### Correlation Analysis
+
 We began with correlations between numeric features (e.g., temperature, humidity, rentals) to detect multicollinearity and guide model inputs.
 ![Correlation Matrix](Visualization_images/Correlation_Matrix.png)
 
-**Key insight:**  
+**Key insight:**
 - Temperature (`temp` / `atemp`) has a strong positive correlation with rentals.
 - Humidity shows a negative correlation.
 - Wind speed has minimal influence.
 
+Next we evaluated the amount of rides given a certain type of weather in a certain season.
+
+![Average Ridership by Season and Weather Type](Visualization_images/Average_Ridership_by_Season_and_Weather_Type.png)
+![Weather Impact by User Type](plots_dynamic/weather_pct_change_usertype_dynamic.png)
+###  Weather Sensitivity
+Weather impacts are significant:
+- Severe weather conditions (e.g. Heavy Rain/Snow and Light Snow/Rain) negatively impacts ridership.
 ---
 
-### Temperature Effects by Season
-Kernel Density Estimation (KDE) plots revealed how total rides vary with temperature across seasons, capturing non-linear relationships.
-![Density of Temp vs Total Rides by Season](Visualization_images/Density_of_Temp_vs_Total_Rides_by_Season.png)
-
-**Key insight:**  
-- Warm temperatures in spring/summer correspond to higher ride densities.
-- Winter months have consistently low rides regardless of temperature.
-
----
-
-### Hourly & Seasonal Patterns
+### Hourly & Seasonal Patterns by User Type
 To identify when people ride most:
 - Registered riders dominate weekday commuting hours (8 AM and 5–6 PM).
 - Casual usage spikes midday on weekends/holidays.
-- Rentals peak in summer and drop sharply in winter.
+- Average ridership peaks in summer and drops sharply in winter.
 
-| Visualization | Description |
-|---------------|-------------|
-| ![Average Hourly Demand](plots_static/avg_hourly_demand.png) | Overall hourly demand |
-| ![Rentals by Season](plots_static/avg_rentals_by_season.png) | Seasonal rental averages |
-
-**Actionable insight:**  
-- Operations can plan bike redistribution to match commuting peaks and summer highs.
-
----
-
-### User Type & Working Day Patterns
-We segmented hourly demand by user type and working day to understand behavioral differences.
+We segmented hourly demand by user type and day type (weekday = dotted, weekend/holiday = solid) to understand behavioral differences.
 ![Average Ridership by Hour user type and working day](Visualization_images/Average_Ridership_by_Hour_user_type_and_working_day.png)
+
 
 **Key insight:**  
 - Registered riders show sharp commuter peaks.
-- Casual riders show smoother midday usage, particularly on weekends.
-
----
-
-###  Weather Sensitivity
-Weather impacts are significant:
-- Heavy rain → **−63%** ridership.
-- Mist/Cloudy → **−17%** ridership compared to clear days.
-
-| Visualization | Description |
-|---------------|-------------|
-| ![Weather Impact Overall](plots_static/ridership_pct_change.png) | Overall weather impact |
-| ![Temp vs Rentals](plots_static/temp_vs_rentals_season.png) | Temperature vs rentals by season |
-
-**Actionable insight:**  
-- Marketing can target moderate-weather dips.
-- Operations can scale fleet size during adverse weather.
-
----
-
-### Hourly Weather Interactions
-
-We also explored how hourly demand shifts under varying weather conditions.
-![Weather Hour Heatmap](plots_dynamic/weather_hour_heatmap.png)
-
-**Key insight:**  
-- Morning/evening peaks are strongest on clear days and flatten during poor weather.
-
+- Casual riders show smoother midday usage, particularly on weekends/holidays.
+- Registered and casual riders show similar hourly usage patterns on weekends/holidays.
 ---
 
 ### Summary of EDA Insights
-
-- **Temporal:** Strong commuter-hour peaks and summer highs.
-- **User Segments:** Registered riders dominate weekdays; casual riders dominate weekends.
+We reviewed all exploratory visualizations as a team to elucidate the following findings:
+- **Temporal:** Registered riders show commuter-hour peaks and summer highs are seen across both registered and casual riders.
+- **User Segments:** Registered riders account for >80% of total ridership and dominate weekdays.
 - **Weather:** Clear negative effects of adverse weather.
 - **Guidance for Modeling:** Include hour-of-day, season, and weather variables in predictive models.
 
 These insights directly informed feature engineering and guided our modeling choices.
 
-## Exploratory Data Analysis
-Pandas, numpy, matplotlib.pyplot, and seaborn libraries were used for exploratory data analysis visualizations, including heatmaps, scatter plots, bar graphs, and histograms, which were then reviewed by the team members to investigate trends and relationships in the dataset. In particular, we noticed that:
-- Total count of riders was mostly represented by registered riders (accounting for >80%), as opposed to casual riders.
-- Registered ridership peaked on weekdays during rush hour, while casual ridership peaked mid-afternoon on weekends.
-- Rentals are highest in summer and drop sharply in winter.
-- Weather heavily influences demand: clear days drive peak usage; heavy rain or snow drastically reduces ridership.
+- 
 
-### Correlation Analysis
-We calculated pairwise correlations between key features (e.g., temperature, humidity, rentals) to detect multicollinearity and guide model inputs.
-![Correlation Matrix](Visualization_images/Correlation_Matrix.png)
-
-## Density Insights
-KDE plots reveal how rentals vary with temperature across seasons, highlighting non-linear relationships often missed in simple averages.
-![Density of Temp vs Total Rides by Season](Visualization_images/Density_of_Temp_vs_Total_Rides_by_Season.png)
-
-### Hourly & Seasonal Patterns
-- Registered riders dominate weekday commuting hours (8 AM, 5–6 PM).
-- Casual usage spikes midday on weekends/holidays.
-- Summer shows the highest rentals; winter significantly drops.
-![Average Hourly Demand](plots_static/avg_hourly_demand.png)
-![Weekday vs Weekend Demand](plots_static/avg_hourly_weekday_weekend.png)
-![Rentals by Season](plots_static/avg_rentals_by_season.png)
-![Usage by Season and Day Type](plots_static/avg_usage_season_daytype.png)
-
-### Weather Sensitivity
-Weather strongly influences ridership:
-- Heavy rain → **−63%** ridership.
-- Mist/Cloudy → **−17%** ridership.
-![Weather Impact Overall](plots_static/ridership_pct_change.png)
-![Weather Impact by User Type](plots_dynamic/weather_pct_change_usertype_dynamic.png)
-![Temp vs Rentals](plots_static/temp_vs_rentals_season.png)
-
-### Advanced Weather Patterns
-Average rentals by hour & weather:
-![Weather Hour Heatmap](plots_dynamic/weather_hour_heatmap.png)
 
 To explore the dynamic features download the (INSERT FILE NAME) file in our repo. 
-
-**Actionable Insights from EDA:**
-- Focus operations on peak commuter hours and summer months.
-- Consider interaction effects between weather and season in modeling.
 
 
 ## Data Analysis (Linear Regression, Random Forest, Clustering, Forecasting & Anomaly Detection)
@@ -571,9 +497,7 @@ Keep in mind that we are looking at total count. If we were to compare preferenc
 ![Density of Temp vs Total Rides by Season](Visualization_images/Density_of_Temp_vs_Total_Rides_by_Season.png)
 
 
-Here we evaluate the amount of rides given a certain type of weather at a certain season.
 
-![Average Ridership by Season and Weather Type](Visualization_images/Average_Ridership_by_Season_and_Weather_Type.png)
 
 
 This graph highlights the different behaviors of registered and casual riders, not only between the two user types but also depending on whether it is a working day or not.
@@ -616,23 +540,19 @@ Through this capstone project, our team combined **exploratory analysis**, **pre
 
  **What we accomplished together:**
 - Mapped **hourly and seasonal usage patterns**, revealing when and where demand peaks.
-- Quantified the impact of **weather and calendar variables** on ridership, giving clarity on controllable and uncontrollable drivers.
+- Quantified the impact of **weather and temporal variables** on ridership, giving clarity on controllable and uncontrollable drivers.
 - Built interpretable **Linear Regression models** as a strong baseline and contrasted them with **Random Forest Regressors** for improved accuracy and richer feature interactions.
-- Applied **K‑Means clustering** to segment usage into **high**, **moderate**, and **low‑demand hour groups**, enabling smarter rebalancing strategies.
-- Developed a **60‑day forecast** using Prophet to empower stakeholders to **plan ahead** with confidence.
-- Implemented **anomaly detection** to flag unusual patterns, ensuring operational resilience and data integrity.
 
  **Why this matters to our stakeholders:**
 - **Operations teams** can now proactively adjust fleet distribution and maintenance schedules around predicted demand patterns, instead of reacting after issues occur.
-- **Marketing and growth teams** can align campaigns with low‑demand windows or amplify peak opportunities, especially targeting casual riders for conversion.
+- **Marketing and growth teams** can align campaigns with low‑demand windows or amplify peak opportunities, to incentivize casual riders to register.
 - **Executives and finance** gain data‑backed confidence in ROI decisions on infrastructure and budget allocations.
-- **City planners and public health** can leverage our findings to inform urban mobility and safety initiatives, knowing when and where bikes are most utilized.
+- **City planners and public health** can leverage our findings to inform urban mobility and safety initiatives, knowing when bikes are most utilized.
 
  **Key Takeaways:**
 - Weather and seasonality significantly drive usage patterns—summer and clear days are your allies.
 - Demand is far from uniform: **commuting peaks** and **weekend midday surges** stand out and should guide rebalancing and staffing.
 - Predictive modeling doesn’t just describe the past; it gives the power to **anticipate the future** and prepare for uncertainty.
-- Anomaly detection ensures that hidden issues, from sudden demand drops to unexplained spikes, are not overlooked but instead become learning opportunities.
 
 **Team effort & next steps:**
 This was a collaborative journey where each member brought unique skills—data wrangling, visualization design, statistical modeling, and time‑series expertise—to craft a comprehensive data story.
