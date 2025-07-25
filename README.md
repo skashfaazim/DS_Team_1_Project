@@ -1,82 +1,95 @@
 # DS_Team_1_Project
+# Bike Sharing Demand Analysis & Forecasting  
+_Data Science Institute – Cohort 6 – Team 1 Capstone Project_
 
-# Bike Sharing Dataset
+As part of the University of Toronto’s Data Science Certificate program, our team analyzed the [Bike Sharing Dataset](https://archive.ics.uci.edu/dataset/275/bike+sharing+dataset) to deliver **actionable, data‑driven insights** for operational planning, marketing strategy, and urban policy.
 
-Data Science Institute - Cohort 6 - Team 1 Project
+**Key Takeaways:**
+- **Predicted hourly and daily demand** using weather and calendar data.
+- **Identified key drivers** (temperature, humidity, season, hour of day).
+- **Clustered usage patterns** to distinguish peak vs. off‑peak behaviors.
+- **Quantified weather impact** (e.g., heavy rain → −63% ridership).
+- **Built forecasting models** (Linear Regression & Random Forest) with R² up to **0.84**.
+- **Detected anomalies** for operational risk monitoring.
 
-As part of the Data Scince Certificate program at the University of Toronto's Data Science Institute, our capstone project allowed us to showcase our technical skills that we have developed over this certificate program . We chose the "Bike Sharing" dataset to apply our analytical and technical skills to. To complete our final project, we summarized the data, performed exploratory analysis', and created visualizations to present actionable insights. 
+**Outcome:** A toolkit of insights for **higher management & stakeholders**—optimizing rebalancing schedules, marketing timing, and strategic planning.
 
 
 ## Members
-
-
 - Rachel Barber-Pin [rbarberpin](https://github.com/rbarberpin)
 - Ana Dubcovsky [anadub](https://github.com/anadub)
 - Jonah Chevrier [chevrie4](https://github.com/chevrie4)
 - Muhammad Ammar Bin Che Mahzan [AmmarMahzan](https://github.com/AmmarMahzan)
 - Syyeda Kashfa Azim [skashfaazim](https://github.com/skashfaazim) 
 
-# Business case
 
-We analyze the Bike Sharing dataset to **predict when and under what conditions demand rises or falls**. This lets:
+## Business Case
 
-- **Operations/Logistics** optimize bike/dock rebalancing and schedule maintenance in low-demand windows.  
-- **Marketing/Growth** time promotions to slow periods and boost conversion from casual to registered riders.  
-- **City planners/Public health** plan infrastructure and safety initiatives during peak use.
+Understanding **when** and **under what conditions** demand rises or falls allows:
+- **Operations**: optimize truck routing, docking, and maintenance.
+- **Marketing**: target low-demand windows and convert casual to registered riders.
+- **City Planners**: plan infrastructure and safety initiatives during peak usage.
 
-*Scope note:* Data are from Washington D.C. (2011–2012); patterns may not generalize to other cities or years.
+_This analysis focuses on the Capital Bikeshare system (Washington D.C., 2011–2012)._
+
 
 ## Research Questions
 
 1. **Prediction Accuracy:** How accurately can we predict total rentals (`cnt`) per day and per hour using weather and calendar/time features? 
-2. **Key Drivers:** Which variables (e.g., temperature, weather, hour-of-day, season) most influence demand? 
+2. **Key Drivers:** Which variables (e.g., temperature, weather, hour-of-day, season, type of day) most influence demand?
+3. **Rider Segment Patterns:** How do **casual vs. registered** riders differ in their daily and hourly usage patterns and what drives each group?
+
 
 We sourced our raw dataset by downloading from the link below: 
     - https://archive.ics.uci.edu/dataset/275/bike+sharing+dataset
 
+
 ## Stakeholders & Value
 
-| Stakeholder         | Pain Point / Need                               | How Our Analysis Helps                                |
-|---------------------|--------------------------------------------------|--------------------------------------------------------|
-| Operations/Logistics| Empty/full docks; inefficient truck routing     | Hourly/daily forecasts → smarter rebalancing schedules |
+| Stakeholder         | Pain Point / Need                               | How Our Analysis Helps                                 |
+|---------------------|-------------------------------------------------|--------------------------------------------------------|
+| Operations/Logistics| Empty/full docks; inefficient truck routing     | Hourly/daily forecasts → proactive rebalancing         |
 | Marketing/Growth    | When to promote; convert casual to registered   | Identify low-demand windows → targeted campaigns       |
-| Finance/Execs       | Budget & ROI on bikes/docks                     | Demand forecasts → evidence-based allocation           |
-| City Planners/Public Health | Plan infra & safety initiatives         | Usage patterns → data-informed decisions               |
+| Finance/Executives       | Budget & ROI on bikes/docks                     | Demand forecasts → evidence-based investment           |
+| City Planners/Public Health | Infrastructure & safety                 | Usage patterns → data-informed decisions               |
 
 ## Risks / Unknowns
 
 - **Data leakage:** `casual`/`registered` predicting `cnt` inflates performance (excluded in LR).  
-- **External events missing:** Concerts, policy changes, strikes not in dataset.  
-- **Linear assumptions:** Linearity & constant variance may be violated.  
+- **External events missing:** Concerts, policy changes, strikes, extreme weather dates not in dataset.  
+- **Linear assumptions:** Linearity & constant variance may be violated, unable to assess due to timeline restraints. 
 - **Temporal drift:** Patterns can change over years/locations.  
-- **Aggregation:** System-wide counts hide station-level issues.
+- **Aggregation:** System-wide counts hide station-level issues or how individual usage data is counted.
+- **Technological change:** Due to technological evolution, data collection from 10+ years ago may be outdated
+
 
 # Project overview  
   
     - Requirements
-    - Exploratory Data Analysis
     - Understanding the Raw Data
-    - Data Analysis on Pyton
-        - Linear Regression
-        - Clustering
-    - Data Visualization
+    - Exploratory Data Analysis
+    - Data Analysis
+        - Linear Regression Model
+        - Random Forest Model
     - Conclusion
+    - Appendix
     - Team Videos
 
 
 ## Requirements
 
+This project uses the following Python libraries:
 
-This project uses the following Python libraries
-    - Data cleaning: pandas, numpy
-    - Data exploring: pandas, scikitlearn
-    - Visualization: matplotlib, seaborn
+- **Data Cleaning & Manipulation:** pandas, numpy
+- **Exploratory Data Analysis (EDA):** pandas, seaborn, matplotlib, scipy
+- **Feature Engineering & Preprocessing:** scikit-learn (OneHotEncoder, StandardScaler, train_test_split)
+- **Modeling:** scikit-learn (LinearRegression, RandomForestRegressor), statsmodels
 
 
 ## Understanding the Raw Data
-Bike-sharing rental process is highly correlated to the environmental and seasonal settings. For instance, weather conditions, precipitation, day of week, season, hour of the day, etc. can affect the rental behaviors. The core data set is related to the two-year historical log corresponding to years 2011 and 2012 from Capital Bikeshare system, Washington D.C., USA which is publicly available in http://capitalbikeshare.com/system-data.
-The original raw data was aggregated on two hourly and daily basis and then extracted and added the corresponding weather and seasonal information. Weather information are extracted from http://www.freemeteo.com. 
+Bike-sharing rental process is correlated to the environmental and seasonal settings. For instance, weather conditions, precipitation, day of week, season, hour of the day, etc. can affect the rental behaviors. The core data set is related to the two-year historical log corresponding to years 2011 and 2012 from Capital Bikeshare system, Washington D.C., USA.
 
+The original raw data was aggregated on two basis (hourly and daily) and then extracted and added the corresponding weather and seasonal information. Weather information are extracted from http://www.freemeteo.com. 
 
 ### Schema 
 
@@ -110,41 +123,66 @@ The following table present key summarizations derived from the Bike Sharing dat
 | What is the time range of this dataset?    | The timeline range for this data is between 2011-01-01 to 2012-12-31 |
 | What is the total number of instances in the dataset? | 17379                                          |
 | What is the total number of columns?       | 13                                                         |
-| How many values are missing?               | There are no missing values                                |
+| How many values are missing or duplicated?               | There are no missing or duplicated values                                |
+
+## Exploratory Data Analysis (EDA)
+
+To understand the dataset before modeling, we performed a comprehensive EDA, creating visualizations such as heatmaps, scatter plots, bar graphs, and histograms, which were then reviewed by the team members to investigate trends and relationships in the dataset.
+
+Our aim was to uncover temporal patterns, seasonality, weather impacts, and relationships among variables that drive bike rental behavior.
+
+### Correlation Analysis
+
+We began with correlations between numeric features (e.g., temperature, humidity, rentals) to detect multicollinearity and guide model inputs.
+![Correlation Matrix](Visualization_images/Correlation_Matrix.png)
+
+**Key insight:**
+- Temperature (`temp` / `atemp`) has a strong positive correlation with rentals.
+- Humidity shows a negative correlation.
+- Wind speed has minimal influence.
+
+Next we evaluated the amount of rides given a certain type of weather in a certain season.
+
+![Average Ridership by Season and Weather Type](Visualization_images/Average_Ridership_by_Season_and_Weather_Type.png)
+
+###  Weather Sensitivity
+Weather impacts are significant:
+- Severe weather conditions (e.g. Heavy Rain/Snow and Light Snow/Rain) negatively impacts ridership.
+---
+
+### Hourly & Seasonal Patterns by User Type
+To identify when people ride most:
+- Registered riders dominate weekday commuting hours (8 AM and 5–6 PM).
+- Casual usage spikes midday on weekends/holidays.
+- Average ridership peaks in summer and drops sharply in winter.
+
+We segmented hourly demand by user type and day type (weekday = dotted, weekend/holiday = solid) to understand behavioral differences.
+![Average Ridership by Hour user type and working day](Visualization_images/Average_Ridership_by_Hour_user_type_and_working_day.png)
 
 
-## Exploratory Data Analysis
+**Key insight:**  
+- Registered riders show sharp commuter peaks.
+- Casual riders show smoother midday usage, particularly on weekends/holidays.
+- Registered and casual riders show similar hourly usage patterns on weekends/holidays.
+---
 
-Pandas, numpy, matplotlib.pyplot, and seaborn libraries were used for exploratory data analysis visualizations, including heatmaps, scatter plots, bar graphs, and histograms, which were then reviewed by the team members to investigate trends and relationships in the dataset. In particular, we noticed that:
--Total count of riders was mostly represented by registered riders (accounting for >80%), as opposed to casual riders.
--Registered ridership peaked on weekdays during rush hour, while casual ridership peaked mid-afternoon on weekends.
+### Summary of EDA Insights
+We reviewed all exploratory visualizations as a team to elucidate the following findings:
+- **Temporal:** Registered riders show commuter-hour peaks and summer highs are seen across both registered and casual riders.
+- **User Segments:** Registered riders account for >80% of total ridership and dominate weekdays.
+- **Weather:** Clear negative effects of adverse weather.
+- **Guidance for Modeling:** Include hour-of-day, season, and weather variables in predictive models.
 
-To explore the dynamic features download the (INSERT FILE NAME) file in our repo. 
+These insights directly informed feature engineering and guided our modeling choices.
 
 
-## Data Analysis (Linear Regression, Clustering)
+## Data Analysis (Linear Regression, Random Forest, Clustering, Forecasting & Anomaly Detection)
 
-## Model Selection
+### Model Selection
 
-### Linear Regression (with One-Hot Encoding)
+### A. Linear Regression Results: Combined vs. Separate Daily Models
 
-- **Why this model?** Simple, interpretable baseline. One-hot encoding lets us include categorical drivers (season, month, hour, weather) correctly.  
-- **Preprocessing:** OneHotEncoder for categorical codes + StandardScaler for numeric (temp, atemp, hum, windspeed).  
-- **Performance:**  
-  | Model  | R²    | RMSE  | MAE  |
-  |--------|-------|-------|------|
-  | Daily  | 0.842 | 796.5 | 583.0 |
-  | Hourly | 0.681 | 100.4 | 74.1 |
-
-- **Key drivers (|coef|):**  
-  - **Daily:** Bad weather ↓ (weathersit_3), winter ↓, temp ↑, fall ↑, Sep ↑, Sunday ↑  
-  - **Hourly:** Peaks at 08:00 & 17–18; lows 0–6; worst weather ↓
-
-- **Limitations:** Assumes linear, additive effects and constant variance; residuals show some heteroscedasticity → consider Ridge/Lasso or tree models next.
-
-> Full details (diagnostics, plots, coefficients, recommendations) in `reports/linear_model_findings.md`.
-
-### Random Forest Regressor
+### B. Random Forest Regressor
 
 - **Captures Nonlinear Relationships and Interactions:**  
   Real-world factors often interact in complex ways. Random forests model these nonlinear patterns without manual feature engineering.
@@ -166,7 +204,7 @@ This dual approach supports both exploratory analysis and practical forecasting 
 
 # Summary of Insights from the Models
 
-## 1. Linear Regression with One-Hot Encoding
+## 1. Linear Regression with One-Hot Encoding (Combined Day and Hour)
 
 ### What We Did:
 - Transformed categorical variables (`season`, `hr`, `workingday`) using one-hot encoding.
@@ -184,26 +222,49 @@ This dual approach supports both exploratory analysis and practical forecasting 
 - Limitations:  
   Cannot capture nonlinear trends or interactions (e.g., "hour × weekend").
 
-### Linear Regression: Actual vs Predicted Visualization
+### Linear Regression Results (Daily & Hourly)
+### 1. Objective  
+Predict total rentals (`cnt`) using weather and calendar/time features, then translate insights into operational recommendations.
 
-![Linear Regression model](Images/Linear_Regression.png)
+### 2. Data & Method  
+- **Datasets:** `day.csv`, `hour.csv`  
+- **Target:** `cnt`  
+- **Dropped cols:** `instant`, `dteday`, `casual`, `registered`, `cnt`  
+- **Pipeline:** One-hot encode categorical + scale numeric → LinearRegression  
+- **Split:** 80% train / 20% test  
 
-#### Overview
+### 3. Performance  
 
-This scatter plot visualizes the performance of a linear regression model by comparing the actual bike rental counts (y_test) with the model’s predicted values (y_pred). Each point represents one prediction, while the red dashed diagonal indicates perfect predictions where actual equals predicted.
+| Model  | R²    | RMSE  | MAE   |
+| ------ | ----- | ----- | ----- |
+| Daily  | 0.842 | 796.5 | 583.0 |
+| Hourly | 0.681 | 100.4 |  74.1 |
 
-#### Insights:
+### 4. Key Drivers
 
-The model shows a generally strong upward trend, indicating that it has learned meaningful patterns from the data. 
+#### Daily Model: Predicted vs Actual
+- **Diagonal line**: Represent a prefect model (predicted = actual).  
+- **Dots close to the line**: means the model is predicting well.  
+- **Under-prediction**: points above the line (actual > predicted) - the model missed some of the demand spikes. 
+- **Over-prediction**: points below the line (predicted > actual)—the model sometimes overshoots when demand is low.  
+- **Overall pattern**: most points hug the line, giving us a strong R² of 0.842. A few outliers at the high end show where the model underestimates peak days.  
 
-However, there is visible underprediction at higher rental counts, as many points fall below the diagonal line. This suggests that the model struggles to fully capture peak demand, likely due to its linear nature. 
+<img width="2400" height="1800" alt="Daily Model_pred_vs_actual_prof" src="https://github.com/user-attachments/assets/2227abd2-0a8a-41f5-b9b9-1dbd22555970" />
 
-While the R² score of 0.6162 reflects moderate predictive power, the spread in higher-value predictions indicates room for improvement — particularly by exploring nonlinear models or engineering more informative features.
+
+**Takeaways:**
+- The Daily model shows a clear upward trends, and the predicted values rise as actual values rise, meaning that it is capturing the main patterns in the data. 
+
+
+## Recommendations
+1. **Rebalancing:** target commute peaks; schedule maintenance overnight.  
+2. **Weather-aware ops:** adjust staffing/routes on bad-weather days; promote riding on clear days.  
+3. **Seasonal campaigns:** launch before spring/fall spikes.  
+4. **Segmentation:** model casual vs registered separately for tailored strategies.  
 
 --- 
 
-
-## 2. Random Forest Regressor
+## C. Random Forest Regressor
 
 ### What We Did:
 - Used the same one-hot encoded features.
@@ -211,7 +272,6 @@ While the R² score of 0.6162 reflects moderate predictive power, the spread in 
 
 ### What It Tells Us:
 - Better predictive accuracy:  
-  Higher R² score than the Linear Regression model.
 - Captured nonlinear relationships and interactions:  
   For example, how hour effects vary depending on whether it is a working day.
 - Important features:  
@@ -228,7 +288,6 @@ While the R² score of 0.6162 reflects moderate predictive power, the spread in 
 
 ![Random Forest Model](Images/Random_Forest.png) 
 
-
 #### Overview
 
 This scatter plot compares the actual bike rental counts (y_test) with the predicted counts from a Random Forest regression model (y_pred). Each green point represents a single prediction, and the red dashed diagonal line represents perfect predictions where actual and predicted counts are equal.
@@ -242,61 +301,35 @@ Predictions are more accurate across both low and high rental counts, with less 
 Although some variance and scatter remain, particularly at higher rental counts, the model demonstrates improved predictive power and robustness, making it better suited to modeling the complex, nonlinear relationships in bike rental demand.
 
 
-## Overall Insights
-Both models provide valuable insights:
-
-- The Linear Regression model helps us understand general trends and directional influences (e.g., temperature increase leads to more rentals).
-- The Random Forest model offers a more accurate and nuanced understanding of bike rental behavior, capturing complex interactions between time, weather, and work schedules.
-
-## Visualizations
-
-A correlation matrix is a simple table that shows how strongly related different things are to each other.
-Imagine you’re looking at things like temperature, bike rentals, wind speed, and humidity. A correlation matrix helps you see if, for example:
-When temperature goes up, do bike rentals also go up?
-
-Each cell in the matrix has a number between -1 and 1:
-•	1 means a perfect positive relationship (both go up together).
-•	-1 means a perfect negative relationship (one goes up, the other goes down).
-•	0 means no relationship.
-
-The matrix is often color-coded, so you can quickly spot strong or weak relationships without reading every number.
-It’s a helpful way to find patterns in data and understand which factors might be influencing each other.
-
-It is important to note:
-Correlation ≠ Causation: A strong correlation doesn't mean one variable causes the other.
-Outliers and non-linear relationships might distort correlation values.
-Multicollinearity: If two variables are too highly correlated (like temp and atemp), we may want to drop one in modeling.
-
-![Correlation Matrix](Visualization_images/Correlation_Matrix.png)
-
-
-KDE plots for temperature vs total rides by season, similar to the scatter plots, but using KDE to visualize the density of points.
-Lighter areas for low-density regions are easier to ignore, dark high-density areas grab attention.
-Keep in mind that we are looking at total count. If we were to compare preferences given certain temperature and season, we should look at percentages.
-
-
-![Density of Temp vs Total Rides by Season](Visualization_images/Density_of_Temp_vs_Total_Rides_by_Season.png)
-
-
-Here we evaluate the amount of rides given a certain type of weather at a certain season.
-
-![Average Ridership by Season and Weather Type](Visualization_images/Average_Ridership_by_Season_and_Weather_Type.png)
-
-
-This graph highlights the different behaviors of registered and casual riders, not only between the two user types but also depending on whether it is a working day or not.
-Registered riders display two distinct peaks: one around 8 a.m. and another around 5:30 p.m. on working days. In contrast, the other user types and day combinations do not show such abrupt peaks, with usage generally concentrated between 7 a.m. and 9 p.m.
-
-Average Ridership by Hour (Working Day = 1, Non-Working Day = 0)
-
-![Average Ridership by Hour user type and working day](Visualization_images/Average_Ridership_by_Hour_user_type_and_working_day.png)
-
-
-Average Ridership by Hour (Working Day = 1, Non-Working Day = 0)
-
-The following graph illustrates the impact of varying weather conditions on ridership patterns, with severe weather events resulting in significant deviations from typical usage trends.
-
-![Average Ridership by Hour user type and working day and weather](Visualization_images/Average_Ridership_by_Hour_user_type_and_working_day_and_weather.png)
-
-
-
 ## Conclusion
+Through this capstone project, our team combined **exploratory analysis**, **advanced visualization techniques**, and **predictive modeling** to transform a raw operational dataset into a rich source of actionable insights.
+
+ **What we accomplished together:**
+- Mapped **hourly and seasonal usage patterns**, revealing when and where demand peaks.
+- Quantified the impact of **weather and temporal variables** on ridership, giving clarity on controllable and uncontrollable drivers.
+- Built interpretable **Linear Regression models** as a strong baseline and contrasted them with **Random Forest Regressors** for improved accuracy and richer feature interactions.
+
+ **Why this matters to our stakeholders:**
+- **Operations teams** can now proactively adjust fleet distribution and maintenance schedules around predicted demand patterns, instead of reacting after issues occur.
+- **Marketing and growth teams** can align campaigns with low‑demand windows or amplify peak opportunities, to incentivize casual riders to register.
+- **Executives and finance** gain data‑backed confidence in ROI decisions on infrastructure and budget allocations.
+- **City planners and public health** can leverage our findings to inform urban mobility and safety initiatives, knowing when bikes are most utilized.
+
+ **Key Takeaways:**
+- Weather and seasonality significantly drive usage patterns—summer and clear days are your allies.
+- Demand is far from uniform: **commuting peaks** and **weekend midday surges** stand out and should guide rebalancing and staffing.
+- Predictive modeling doesn’t just describe the past; it gives the power to **anticipate the future** and prepare for uncertainty.
+
+**Team effort & next steps:**
+This was a collaborative journey where each member brought unique skills—data wrangling, visualization design, statistical modeling, and time‑series expertise—to craft a comprehensive data story.
+
+Looking ahead, these insights can be extended by:
+- Integrating **real‑time data** streams to refresh forecasts.
+- Refining models with **additional external factors** (events, holidays, weather alerts).
+- Scaling insights to **station‑level granularity** for even sharper operational decisions.
+
+**In short:**  
+We’ve built more than just plots and models — we’ve built a decision‑support foundation that can help a bike‑sharing system operate smarter, market smarter, and grow sustainably. 
+
+## Appendix  
+See folders in the development branch for full code and workflow outline for extra exploratory analysis, visualizations and models that the team completed but were decided to be out of scope for adding to the readme. These extra resources provides more in-depth analysis for above mentioned stakeholders. 
