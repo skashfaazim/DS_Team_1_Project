@@ -252,83 +252,27 @@ Predict total rentals (`cnt`) using weather and calendar/time features, then tra
 
 ### 4. Key Drivers
 
-#### Daily Model  
-- **− Weather (weathersit_3):** −1,048 rentals  
-- **+ Year (yr_1):** +991 rentals  
-- **− Winter vs + Fall:** −856 vs +798  
-- **+ Clear weather (weathersit_1):** +778  
-- **+ Temperature:** +686 per 1 SD  
-- **Month effects:** Sep +639; Jul −484  
-- **+ Sunday:** +286  
+#### Daily Model: Predicted vs Actual
+- **Diagonal line**: Represent a prefect model (predicted = actual).  
+- **Dots close to the line**: means the model is predicting well.  
+- **Under-prediction**: points above the line (actual > predicted) - the model missed some of the demand spikes. 
+- **Over-prediction**: points below the line (predicted > actual)—the model sometimes overshoots when demand is low.  
+- **Overall pattern**: most points hug the line, giving us a strong R² of 0.842. A few outliers at the high end show where the model underestimates peak days.  
 
 <img width="2400" height="1800" alt="Daily Model_pred_vs_actual_prof" src="https://github.com/user-attachments/assets/2227abd2-0a8a-41f5-b9b9-1dbd22555970" />
 
-<img width="2400" height="1800" alt="Daily Model_residuals_vs_fitted_prof" src="https://github.com/user-attachments/assets/731d06e7-304b-4338-bf90-8ae563138b85" />
 
-
-<img width="2400" height="1800" alt="daily_top15_features" src="https://github.com/user-attachments/assets/2e7540b8-ef0e-4e38-b042-352301b1014d" />
-
-
-
-#### Hourly Model  
-- **+ Hr 17 (5 PM):** +257; Hr 18 +217; Hr 8 +191  
-- **− Hr 0–6:** −125 to −165 (overnight)  
-- **− Worst weather (weathersit_4):** −77  
-
+#### Hourly Model : Predicted vs Actual 
+- **Same diagonal** for reference.  
+- **Dots clustered near the line** (especially in the 0–200 range) indicate the model is pretty accurate at low to moderate rental volumes. 
+- **Fan shape widening** as actual counts increase signals growing error at higher volumes, consistent with an R² of 0.68 and suggesting we might need non linear features or models to better capture peak hour spikes.  
 
 <img width="2400" height="1800" alt="Hourly Model_pred_vs_actual_prof" src="https://github.com/user-attachments/assets/52a222ba-0b0b-4b94-a32f-a906f4d2a084" />
 
-<img width="2400" height="1800" alt="Hourly Model_residuals_vs_fitted_prof" src="https://github.com/user-attachments/assets/61c41ef4-0075-479a-8788-a99f6df744a9" />
+**Takeaways:**
+- Both models show a clear upward trend. Predicted values rise as actual values rise, so they’re capturing the main patterns.
+- The daily model is stronger overall. While the hourly model has more scatter at the peaks, suggesting we might need extra features or a non linear model to nail those high traffic hours.
 
-
-<img width="2400" height="1800" alt="hourly_top15_features" src="https://github.com/user-attachments/assets/5f3175bc-0143-4c29-98ba-ae767b24c079" />
-
-**Takeaways:** Bad weather & winter cut demand; warmth, fall & clear days boost it. Commute-hour spikes drive hourly patterns.
-
-### 5. Residual Diagnostics  
-- **Daily:** residuals centered around zero; mild non-linearity at extremes  
-- **Hourly:** residual variance ↑ with fitted values (heteroscedasticity)
-
-### 6. Segment Analyses
-
-#### 6.1 Casual vs Registered  
-- **Daily R²:** Reg 0.846 vs Cas 0.707  
-- **Hourly R²:** Reg 0.676 vs Cas 0.585  
-- **Patterns:** Reg riders peak commuter hours; casual riders flatter late-day/weekends  
-- **Top Drivers (Daily):**  
-  - **Casual:** Temp +336; Sunday +270; Fall +210; Working day −297  
-  - **Registered:** Weather_3 −851; Yr_1 +851; Fall +817; Winter −772  
-- **Top Drivers (Hourly):**  
-  - **Casual:** Hr 17 +32; Hr 13–16 +29–31  
-  - **Registered:** Hr 17 +225; Hr 8 +199; Hr 18 +197; Overnight (2–4 AM) −135  
-
-
-<img width="1920" height="1440" alt="casual_vs_registered_daily" src="https://github.com/user-attachments/assets/0e23f235-e687-40b2-8482-a780bb22f242" />
-
-
-<img width="1920" height="1440" alt="casual_vs_registered_hourly" src="https://github.com/user-attachments/assets/4b14b817-3a05-4bb7-8c92-70c359ec7c5f" />
-
-
-#### 6.2 Working vs Non-Working  
-- **Daily R²:** Work 0.822 vs Non 0.811  
-- **Hourly R²:** Work 0.838 vs Non 0.778  
-- **Patterns:** Workdays—sharp 8 AM/5 PM peaks; Non-Workdays—broad midday & Sunday surge  
-- **Top Drivers (Daily):**  
-  - **Working:** Feels-like temp +1,061; Yr ±1,037; Weather_3 −995  
-  - **Non-Working:** Sunday +1,275; Dec −1,615; Weather_3 −1,516  
-- **Top Drivers (Hourly):**  
-  - **Working:** Hr 17 +317; Hr 8 +301; Hr 18 +289; Overnight (3–4 AM) −172 to −178  
-  - **Non-Working:** Hr 12–15 +166–167; Hr 4 −151  
-
-
-<img width="1920" height="1440" alt="working_vs_nonworking_daily" src="https://github.com/user-attachments/assets/adc4d079-328a-4727-82d4-f25139cf4ee4" />
-
-
-<img width="1920" height="1440" alt="working_vs_nonworking_hourly" src="https://github.com/user-attachments/assets/d62acc72-386f-4374-9c98-5f542b58299c" />
-
-
-
----
 
 ## Recommendations
 1. **Rebalancing:** target commute peaks; schedule maintenance overnight.  
