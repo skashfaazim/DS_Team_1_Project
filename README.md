@@ -133,7 +133,7 @@ Our aim was to uncover temporal patterns, seasonality, weather impacts, and rela
 ### Correlation Analysis
 
 We began with correlations between numeric features (e.g., temperature, humidity, rentals) to detect multicollinearity and guide model inputs.
-![Correlation Matrix](Visualization_images/Correlation_Matrix.png)
+![Correlation Matrix](Visualization_images/EDA_images/Correlation_Matrix.png)
 
 **Key insight:**
 - Temperature (`temp` / `atemp`) has a strong positive correlation with rentals.
@@ -142,7 +142,7 @@ We began with correlations between numeric features (e.g., temperature, humidity
 
 Next we evaluated the amount of rides given a certain type of weather in a certain season.
 
-![Average Ridership by Season and Weather Type](Visualization_images/Average_Ridership_by_Season_and_Weather_Type.png)
+![Average Ridership by Season and Weather Type](Visualization_images/EDA_images/Average_Ridership_by_Season_and_Weather_Type.png)
 
 ###  Weather Sensitivity
 Weather impacts are significant:
@@ -155,7 +155,7 @@ To identify when people ride most:
 - Average ridership peaks in summer and drops sharply in winter.
 
 We segmented hourly demand by user type and day type (weekday = dotted, weekend/holiday = solid) to understand behavioral differences.
-![Average Ridership by Hour user type and working day](Visualization_images/Average_Ridership_by_Hour_user_type_and_working_day.png)
+![Average Ridership by Hour user type and working day](Visualization_images/EDA_images/Average_Ridership_by_Hour_user_type_and_working_day.png)
 
 **Key insight:**  
 - Registered riders show sharp commuter peaks.
@@ -280,7 +280,7 @@ Predict total rentals (`cnt`) using weather and calendar/time features, then tra
 
 ### Random Forest: Actual vs Predicted Visualization
 
-![Random Forest Model](Images/Random_Forest.png) 
+![Random Forest Model](Visualization_images/Images/Random_Forest.png) 
 
 #### Overview
 
