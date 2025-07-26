@@ -1,5 +1,5 @@
 # DS_Team_1_Project
-# Bike Sharing Demand Analysis & Forecasting  
+# Bike Sharing Demand Analysis
 _Data Science Institute – Cohort 6 – Team 1 Capstone Project_
 
 As part of the University of Toronto’s Data Science Certificate program, our team analyzed the [Bike Sharing Dataset](https://archive.ics.uci.edu/dataset/275/bike+sharing+dataset) to deliver **actionable, data‑driven insights** for operational planning, marketing strategy, and urban policy.
