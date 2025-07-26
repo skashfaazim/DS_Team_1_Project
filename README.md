@@ -4,18 +4,19 @@ _Data Science Institute – Cohort 6 – Team 1 Capstone Project_
 
 As part of the University of Toronto’s Data Science Certificate program, our team analyzed the [Bike Sharing Dataset](https://archive.ics.uci.edu/dataset/275/bike+sharing+dataset) to deliver **actionable, data‑driven insights** for operational planning, marketing strategy, and urban policy.
 
-**Key Takeaways:**
-- **Predicted hourly and daily demand** using weather and calendar data.
-- **Identified key drivers** (temperature, humidity, season, hour of day).
-- **Clustered usage patterns** to distinguish peak vs. off‑peak behaviors.
-- **Quantified weather impact** (e.g., heavy rain → −63% ridership).
-- **Built forecasting models** (Linear Regression & Random Forest) with R² up to **0.84**.
-- **Detected anomalies** for operational risk monitoring.
 
-**Outcome:** A toolkit of insights for **higher management & stakeholders**—optimizing rebalancing schedules, marketing timing, and strategic planning.
+### Key Takeaways
+- **Analyzed daily and hourly bike rental patterns** using two years of operational and weather data from the Capital Bikeshare system (Washington D.C., 2011–2012).  
+- **Identified key drivers of demand** such as temperature, humidity, season, and hour of day, providing clear guidance on when ridership increases or decreases.  
+- **Segmented rider behaviors** to show how casual and registered users differ in their usage across weekdays, weekends, and seasons.  
+- **Built and compared predictive models** (Linear Regression and Random Forest) to forecast ridership with R² values up to **0.84**, balancing interpretability with accuracy.
+  
+**Outcome:**  
+A comprehensive toolkit of insights for **operations, marketing, finance, and city planning teams**—supporting proactive rebalancing, targeted promotions, and data‑driven investment decisions.
 
 
 ## Members
+
 - Rachel Barber-Pin [rbarberpin](https://github.com/rbarberpin)
 - Ana Dubcovsky [anadub](https://github.com/anadub)
 - Jonah Chevrier [chevrie4](https://github.com/chevrie4)
@@ -85,6 +86,7 @@ This project uses the following Python libraries:
 
 
 ## Understanding the Raw Data
+
 Bike-sharing rental process is highly correlated to the environmental and seasonal settings. For instance, weather conditions, precipitation, day of week, season, hour of the day, etc. can affect the rental behaviours. The core data set is related to the two-year historical log corresponding to years 2011 and 2012 from Capital Bikeshare system, Washington D.C., USA.
 The original raw data was aggregated on by hour and day and then extracted and added the corresponding weather and seasonal information. Weather information are extracted from http://www.freemeteo.com. 
 
@@ -145,7 +147,6 @@ Next we evaluated the amount of rides given a certain type of weather in a certa
 ###  Weather Sensitivity
 Weather impacts are significant:
 - Severe weather conditions (e.g. Heavy Rain/Snow and Light Snow/Rain) negatively impacts ridership.
----
 
 ### Hourly & Seasonal Patterns by User Type
 To identify when people ride most:
@@ -156,12 +157,11 @@ To identify when people ride most:
 We segmented hourly demand by user type and day type (weekday = dotted, weekend/holiday = solid) to understand behavioral differences.
 ![Average Ridership by Hour user type and working day](Visualization_images/Average_Ridership_by_Hour_user_type_and_working_day.png)
 
-
 **Key insight:**  
 - Registered riders show sharp commuter peaks.
 - Casual riders show smoother midday usage, particularly on weekends/holidays.
 - Registered and casual riders show similar hourly usage patterns on weekends/holidays.
----
+
 
 ### Summary of EDA Insights
 We reviewed all exploratory visualizations as a team to elucidate the following findings:
@@ -172,7 +172,6 @@ We reviewed all exploratory visualizations as a team to elucidate the following 
 
 These insights directly informed feature engineering and guided our modeling choices.
 
----
 
 ## Data Analysis (Linear Regression & Random Forest)
 
@@ -202,7 +201,7 @@ This dual approach supports both exploratory analysis and practical forecasting 
 
 # Summary of Insights from the Models
 
-## 1. Linear Regression with One-Hot Encoding (Combined Day and Hour)
+## A. Linear Regression with One-Hot Encoding (Combined Day and Hour)
 
 ### What We Did:
 - Transformed categorical variables (`season`, `hr`, `workingday`) using one-hot encoding.
@@ -249,7 +248,6 @@ Predict total rentals (`cnt`) using weather and calendar/time features, then tra
 
 <img width="2400" height="1800" alt="Daily Model_pred_vs_actual_prof" src="https://github.com/user-attachments/assets/2227abd2-0a8a-41f5-b9b9-1dbd22555970" />
 
-
 **Takeaways:**
 - Daily model shows a clear upward trend. Predicted values rise as actual values rise, so the model captures the main patterns.
 
@@ -259,9 +257,8 @@ Predict total rentals (`cnt`) using weather and calendar/time features, then tra
 3. **Seasonal campaigns:** launch before spring/fall spikes.  
 4. **Segmentation:** model casual vs registered separately for tailored strategies.  
 
----
 
-## C. Random Forest Regressor
+## B. Random Forest Regressor
 
 ### What We Did:
 - Used the same one-hot encoded features.
@@ -297,6 +294,7 @@ Predictions are more accurate across both low and high rental counts, with less 
 
 Although some variance and scatter remain, particularly at higher rental counts, the model demonstrates improved predictive power and robustness, making it better suited to modeling the complex, nonlinear relationships in bike rental demand.
 
+
 ## Conclusion
 Through this capstone project, our team combined **exploratory analysis**, **predictive modeling**, and **advanced visualization techniques** to transform a raw operational dataset into a rich source of actionable insights.
 
@@ -328,6 +326,7 @@ Looking ahead, these insights can be extended by:
 We’ve built more than just plots and models — we’ve built a decision‑support foundation that can help a bike‑sharing system operate smarter, market smarter, and grow sustainably. 
 
 # Appendix
+
 The team created extra visualizations from our exploratory analysis and extra predictive models that we've included in folders in the development branch. These resources provide further insights for our stakeholders past what we have included in this readme file. 
 
 # Team Videos
