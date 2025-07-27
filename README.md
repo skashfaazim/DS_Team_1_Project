@@ -334,5 +334,5 @@ The team created extra visualizations from our exploratory analysis and extra pr
   - Rachel (https://drive.google.com/file/d/1BS6RaEZcYRNbyn6TH7eBCgZ_qF-J3bLr/view?usp=sharing)
   - Muhammed
   - Ana (https://drive.google.com/file/d/1Gq4eOV5Hb4JFMg9mEFeShJ1lYsSjZOeX/view?usp=sharing)
-  - Kashfa
+  - Kashfa (https://drive.google.com/file/d/1nkbJL_eeQpDDnWrmthajE3A-hAVHqGnN/view?usp=sharing)
   - Jonah
